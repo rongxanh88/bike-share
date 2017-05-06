@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title Bike Stations App
+  %body
+    %h1= "Bike Stations"
+    %br
+    =@stations.each do |station|
+    %h2= station.name
+    %h2= station.latitude
+    %h2= station.longitude
+    %h2= station.dock_count
+    %h2= station.installation_date
+    %h2= station.city_id
+    =end
