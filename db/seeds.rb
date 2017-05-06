@@ -1,11 +1,20 @@
 require 'csv'
+require './app/models/station'
+
+def format_date(date)
+    dt = date.split('/')
+    dt[0], dt[1] = dt[1], dt[0]
+    dt.join('/')
+end
+
 
 CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |row|
-  Station.create(name: row[:name],
-                 latitude: row[:latitude],
-                 longitude: row[:longitude],
+  Station.create!(name: row[:name],
+                 latitude: row[:latitude] || 0,
+                 longitude: row[:longitude] || 0,
                  dock_count: row[:dock_count],
-                 installation_date: row[:installation_date]))
+                 installation_date: format_date(row[:installation_date]))
+
   p "Creating Station #{row[:name]} "
 end
 
