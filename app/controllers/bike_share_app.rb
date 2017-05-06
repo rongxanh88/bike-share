@@ -1,7 +1,10 @@
+require 'pry'
+
 class BikeShareApp < Sinatra::Base
   get '/stations' do
     @stations = Station.all
 
-    haml :"stations/index"
+    erb :"stations/index"
+    # haml :"stations/index"
   end
 end
