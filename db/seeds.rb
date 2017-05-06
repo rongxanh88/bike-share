@@ -1,4 +1,5 @@
 require 'csv'
+require 'pry'
 require './app/models/station'
 require './app/models/city'
 
@@ -8,14 +9,16 @@ def format_date(date)
     dt.join('/')
 end
 
-
 CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |row|
+  city = City.create(name: row[:city])
+  current_city = City.find_by(name: row[:city])
+
   Station.create!(name: row[:name],
                  latitude: row[:latitude] || 0,
                  longitude: row[:longitude] || 0,
                  dock_count: row[:dock_count],
-                 installation_date: format_date(row[:installation_date]))
-  City.create(name: row[:city])
+                 installation_date: format_date(row[:installation_date]),
+                 city_id: current_city.id)
 
   p "Creating Station #{row[:name]}, and City #{row[:city]} "
 end
