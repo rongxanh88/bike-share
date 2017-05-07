@@ -46,6 +46,7 @@ class BikeShareApp < Sinatra::Base
     redirect '/stations'
   end
 
+<<<<<<< HEAD
   post '/stations' do
     station = Station.new(name: params[:name],
                           latitude: params[:latitude],
@@ -56,4 +57,9 @@ class BikeShareApp < Sinatra::Base
     redirect '/stations'
   end
 
+  get '/station-dashboard' do
+    @station = Station
+
+    erb :"stations/station-dashboard"
+  end
 end
