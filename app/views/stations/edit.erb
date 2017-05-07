@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+  <head>
+  </head>
+  <body>
+    <h1>Station Editor</h1><br/>
+
+    <form action="/station/<%= @station.id %>" method="post">
+      <input type="hidden" name="_method" value="PUT"/>
+      <label for="">Station Name:</label>
+      <input type="textfield" name="name" value="<%= @station.name %>"><br/>
+      <label for="">Latitude:</label>
+      <input type="textfield" name="latitude" value="<%= @station.latitude %>"><br/>
+      <label for="">Longitude:</label>
+      <input type="textfield" name="longitude" value="<%= @station.longitude %>"><br/>
+      <label for="">Dock Count:</label>
+      <input type="textfield" name="dock_count" value="<%= @station.dock_count %>"><br/>
+      <label for="">Installation Date:</label>
+      <input type="textfield" name="installation_date" value="<%= @station.installation_date %>"><br/>
+      <input type="submit" value="Update Station"/>
+    </form>
+
+  </body>
+</html>
