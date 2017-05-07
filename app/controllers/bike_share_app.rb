@@ -8,6 +8,16 @@ class BikeShareApp < Sinatra::Base
     # haml :"stations/index"
   end
 
+  # get '/stations/new' do
+  #   erb :"stations/new"
+  # end
+
+  get '/stations/:id' do
+    @station = Station.find_by(id: params[:id])
+
+    erb :"stations/show"
+  end
+
   get '/stations/:id/edit' do
     @station = Station.find_by(id: params[:id])
 
@@ -15,7 +25,6 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/station/:id' do
-    binding.pry
     station = Station.find_by(id: params[:id])
     station.update_attributes(:name              => params[:name],
                               :latitude          => params[:latitude],
