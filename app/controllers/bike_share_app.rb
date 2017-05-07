@@ -10,6 +10,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/' do
     redirect '/stations'
+
   end
 
   get '/stations/new' do
