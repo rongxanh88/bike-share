@@ -61,4 +61,55 @@ class BikeShareApp < Sinatra::Base
 
     erb :"stations/station-dashboard"
   end
+
+  get '/trips/new' do
+    erb :"trips/new"
+  end
+
+  get '/trips/:id' do
+    @station = Trip.find_by(id: params[:id])
+
+    erb :"trips/show"
+  end
+
+  get '/trips/:id/edit' do
+    @station = trip.find_by(id: params[:id])
+
+    erb :"trips/edit"
+  end
+
+  put '/trips/:id' do
+    trip = trip.find_by(id: params[:id])
+    trip.update_attributes(duration: params[:duration],
+                          start_date: params[:start_date],
+                          end_date: params[:end_date],
+                          start_id_station: params[:start_id_station],
+                          end_id_station: params[:end_id_station],
+                          bike_id: params[:bike_id],
+                          subscription_type: params[:subscription_type],
+                          zip_code_id: params[:zip_code_id]
+                          )
+
+    redirect '/trips'
+  end
+
+  delete '/trips/:id' do
+    trip.find_by(id: params[:id]).destroy
+
+    redirect '/trips'
+  end
+
+  post '/trips' do
+    trip = trip.new(duration: params[:duration],
+                          start_date: params[:start_date],
+                          end_date: params[:end_date],
+                          start_id_station: params[:start_id_station],
+                          end_id_station: params[:end_id_station],
+                          bike_id: params[:bike_id],
+                          subscription_type: params[:subscription_type],
+                          zip_code_id: params[:zip_code_id]
+                          )
+    trip.save
+    redirect '/trips'
+  end
 end
