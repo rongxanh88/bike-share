@@ -3,6 +3,7 @@ require 'pry'
 class Station < ActiveRecord::Base
   belongs_to :city
   has_many :station_statuses
+  has_many :trips
   validates :name,
             :latitude,
             :longitude,
