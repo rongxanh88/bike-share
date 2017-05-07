@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+  <head>
+  </head>
+  <body>
+
+<h1>Station Dashboard</h1>
+
+  <h3>Station Count: <%= @station.all.count %></h3>
+  <h3>Average Bikes Available her Station: <%=  %></h3>
+  <h3>Most Bikes Available at a Station: <%=  %></h3>
+  <h3>10 Stations where the most bikes are available: <%=  %></h3>
+  <h3>Fewest bikes available at a station: <%=  %></h3>
+  <h3>10 Stations where the fewest bikes are available: <%=  %></h3>
+  <h3>Most recently installed station(s):</h3>
+  <ul><% @station.newest_stations.each do |station| %>
+        <li><%= station %></li>
+      <% end %>
+  </ul>
+  <h3>Oldest Station(s):</h3>
+  <ul><% @station.oldest_stations.each do |station| %>
+        <li><%= station %></li>
+      <% end %>
+    </ul>
+</body>
+</html>
+
+
+
+
+
+
+<!--  Average bikes available per station (based on docks).
+Most bikes available at a station (based on docks).
+Station(s) where the most bikes are available (based on docks).
+Fewest bikes available at a station (based on docks).
+Station(s) where the fewest bikes are available (based on docks).
+Most recently installed station.
+Oldest station. -->
