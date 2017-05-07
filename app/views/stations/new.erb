@@ -1,24 +1,17 @@
-<%#<!DOCTYPE html>
-<html lang="en"
-  <head>
-  </head>
-  <body>
-    <h1>Station Editor</h1><br/>
 
-    <form action="/station" method="post">
-      <input type="hidden" name="_method" value="PUT"/>
-      <label for="">Station Name:</label>
-      <input type="textfield" name="name" value=""><br/>
-      <label for="">Latitude:</label>
-      <input type="textfield" name="latitude" value=""><br/>
-      <label for="">Longitude:</label>
-      <input type="textfield" name="longitude" value=""><br/>
-      <label for="">Dock Count:</label>
-      <input type="textfield" name="dock_count" value=""><br/>
-      <label for="">Installation Date:</label>
-      <input type="textfield" name="installation_date" value=""><br/>
-      <input type="submit" value="Update Station"/>
-    </form>
+<h1>Station Editor</h1><br/>
 
-  </body>
-</html>%>
+<form action="/stations" method="post">
+  <!-- <input type="hidden" name="_method" value="post"/> -->
+  <label for="">Station Name:</label>
+  <input type="textfield" name="name" value=""><br/>
+  <label for="">Latitude:</label>
+  <input type="textfield" name="latitude" value=""><br/>
+  <label for="">Longitude:</label>
+  <input type="textfield" name="longitude" value=""><br/>
+  <label for="">Dock Count:</label>
+  <input type="textfield" name="dock_count" value=""><br/>
+  <label for="">Installation Date:</label>
+  <input type="textfield" name="installation_date" value=""><br/>
+  <input type="submit" value="Update Station"/>
+</form>
