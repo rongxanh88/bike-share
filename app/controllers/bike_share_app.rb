@@ -1,3 +1,5 @@
+require "pry"
+
 class BikeShareApp < Sinatra::Base
   get '/stations' do
     @stations = Station.all
@@ -6,9 +8,13 @@ class BikeShareApp < Sinatra::Base
     # haml :"stations/index"
   end
 
-  # get '/stations/new' do
-  #   erb :"stations/new"
-  # end
+  get '/' do
+    redirect '/stations'
+  end
+
+  get '/stations/new' do
+    erb :"stations/new"
+  end
 
   get '/stations/:id' do
     @station = Station.find_by(id: params[:id])
@@ -38,4 +44,11 @@ class BikeShareApp < Sinatra::Base
 
     redirect '/stations'
   end
+
+  post '/stations' do
+    station = Station.new(name: params[:name], latitude: params[:latitude], longitude: params[:longitude], dock_count: params[:dock_count], installation_date: params[:installation_date])
+    station.save
+    redirect '/stations'
+  end
+
 end
