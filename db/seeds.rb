@@ -2,6 +2,7 @@ require 'csv'
 require 'pry'
 require './app/models/station'
 require './app/models/city'
+require './app/models/station_status'
 
 def format_date(date)
     dt = date.split('/')
@@ -23,13 +24,14 @@ CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |
   p "Creating Station #{row[:name]}, and City #{row[:city]} "
 end
 
-# CSV.foreach "db/csv/status.csv", headers: true, header_converters: :symbol do |row|
-#   StationStatus.create(station_id: row[:station_id],
-#                        bikes_available: row[:bikes_available],
-#                        docks_available: row[:docks_available],
-#                        time: row[:time])
-#   p "Creating Station ID #{row[:station_id]}"
-# end
+CSV.foreach "db/csv/status_fixture.csv", headers: true, header_converters: :symbol do |row|
+  StationStatus.create!(station_id: row[:station_id],
+                       bikes_available: row[:bikes_available],
+                       docks_available: row[:docks_available],
+                       time: row[:time])
+  p "Creating Station ID #{row[:station_id]}"
+end
+
 #
 # CSV.foreach "db/csv/trip.csv", headers: true, header_converters: :symbol do |row|
 #
