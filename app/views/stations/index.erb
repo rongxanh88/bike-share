@@ -1,10 +1,9 @@
+
 <h1>Bike Stations</h1><br/>
 
 <% @stations.each do |station| %>
-  <h2><%= station.name %></h2>
-  <h2><%= station.latitude %></h2>
-  <h2><%= station.longitude %></h2>
-  <h2><%= station.dock_count %></h2>
-  <h2><%= station.installtion_date %></h2>
-  <h2><%= station.city_id %></h2>
+  <h2>Station Name: <%= station.name %></h2>
+  <h2>Station Dock Count: <%= station.dock_count %></h2>
+  <h2>Station Installation Date: <%= station.installation_date %></h2>
+  <h2>Station City: <%= station.city.name %></h2>
 <% end %>
