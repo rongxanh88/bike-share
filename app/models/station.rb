@@ -19,19 +19,31 @@ class Station < ActiveRecord::Base
     end
   end
 
-  def self.oldest_date(attribute)
+  def self.fewest(attribute)
     self.minimum(attribute)
   end
 
-  def self.newest_date(attribute)
+  def self.most(attribute)
     self.maximum(attribute)
   end
 
   def self.newest_stations
-    generate_list_of_names(self.where(installation_date: self.newest_date(:installation_date)))
+    generate_list_of_names(self.where(installation_date: self.most(:installation_date)))
   end
 
   def self.oldest_stations
-    generate_list_of_names(self.where(installation_date: self.oldest_date(:installation_date)))
+    generate_list_of_names(self.where(installation_date: self.fewest(:installation_date)))
+  end
+
+  def self.most_docks
+    generate_list_of_names(self.where(dock_count: self.most(:dock_count)))
+  end
+
+  def self.fewest_docks
+    generate_list_of_names(self.where(dock_count: self.fewest(:dock_count)))
+  end
+
+  def self.avg(attribute)
+    self.average(attribute).round(2)
   end
 end
