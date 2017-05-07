@@ -47,7 +47,11 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/stations' do
-    station = Station.new(name: params[:name], latitude: params[:latitude], longitude: params[:longitude], dock_count: params[:dock_count], installation_date: params[:installation_date])
+    station = Station.new(name: params[:name],
+                          latitude: params[:latitude],
+                          longitude: params[:longitude],
+                          dock_count: params[:dock_count],
+                          installation_date: params[:installation_date])
     station.save
     redirect '/stations'
   end
