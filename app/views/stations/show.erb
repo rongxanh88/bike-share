@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en"
-  <head>
-  </head>
-  <body>
-    <h1>Station: <%= @station.name %></h1>
-    <p>Latitude: <%= @station.latitude %></p>
-    <p>Longitude: <%= @station.longitude %></p>
-    <p>Dock Count: <%= @station.dock_count %></p>
-    <p>Installation Date: <%= @station.installation_date %></p>
-    <br/>
-    <a href="/stations/<%= @station.id %>/edit">Edit</a>
-    <form action="/stations/<%= @station.id %>" method="post">
-      <input type="hidden" name="_method" value="DELETE" />
-      <input type="submit" value="Delete" />
-    </form>
-
-  </body>
-</html>
+<h1>Station: <%= @station.name %></h1>
+<p>Latitude: <%= @station.latitude %></p>
+<p>Longitude: <%= @station.longitude %></p>
+<p>Dock Count: <%= @station.dock_count %></p>
+<p>Installation Date: <%= @station.installation_date %></p>
+<br/>
+<a href="/stations/<%= @station.id %>/edit">Edit</a>
+<form action="/stations/<%= @station.id %>" method="post">
+  <input type="hidden" name="_method" value="DELETE" />
+  <input type="submit" value="Delete" />
+</form>
