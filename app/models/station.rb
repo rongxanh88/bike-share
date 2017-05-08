@@ -9,7 +9,6 @@ class Station < ActiveRecord::Base
             :installation_date,
             presence: true
 
-
   def self.generate_list_of_names(object)
     if object.length == 1
       Array.new << object.first.name
@@ -18,28 +17,20 @@ class Station < ActiveRecord::Base
     end
   end
 
-  def self.fewest(attribute)
-    self.minimum(attribute)
-  end
-
-  def self.most(attribute)
-    self.maximum(attribute)
-  end
-
   def self.newest_stations
-    generate_list_of_names(self.where(installation_date: self.most(:installation_date)))
+    generate_list_of_names(self.where(installation_date: self.maximum(:installation_date)))
   end
 
   def self.oldest_stations
-    generate_list_of_names(self.where(installation_date: self.fewest(:installation_date)))
+    generate_list_of_names(self.where(installation_date: self.minimum(:installation_date)))
   end
 
   def self.most_docks
-    generate_list_of_names(self.where(dock_count: self.most(:dock_count)))
+    generate_list_of_names(self.where(dock_count: self.maximum(:dock_count)))
   end
 
   def self.fewest_docks
-    generate_list_of_names(self.where(dock_count: self.fewest(:dock_count)))
+    generate_list_of_names(self.where(dock_count: self.minimum(:dock_count)))
   end
 
   def self.avg(attribute)

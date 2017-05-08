@@ -3,27 +3,40 @@
 
 <form action="/stations" method="post">
   <!-- <input type="hidden" name="_method" value="post"/> -->
-  <label for="">Station Name:</label>
-  <input type="textfield" name="name" value=""><br/>
-  <label for="">Latitude:</label>
-  <input type="textfield" name="latitude" value=""><br/>
-  <label for="">Longitude:</label>
-  <input type="textfield" name="longitude" value=""><br/>
-  <label for="">Dock Count:</label>
-  <input type="textfield" name="dock_count" value=""><br/>
-  <label for="">Installation Date:</label>
-  <input type="textfield" name="installation_date" value=""><br/>
-  <label for="">City (San Jose, Redwood City, Mountain View, Palo Alto and San Francisco):</label>
-  <input type="textfield" name="city" value=""><br/>
-  <input type="submit" value="Submit">
-<br></br>
-  <!-- <div class="dropdown">
-  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown trigger
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dLabel">
-    <li>balls</li>
-  </ul>
-</div> -->
+  <h4>Create New Station</h4>
+  <div class="input-group">
+    <input type="text" name="station[name]" class="form-control" placeholder="Station name" id="station_name_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+    <input type="text" name="station[latitude]" class="form-control" placeholder="Latitude" id="station_latitude_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+    <input type="text" name="station[longitude]" class="form-control" placeholder="Longitude" id="station_longitude_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+    <input type="text" name="station[dock_count]" class="form-control" placeholder="Dock Count" id="station_dock_count_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+    <input type="text" name="station[installation_date]" class="form-control" placeholder="Installation date" id="station_installation_date_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+    <div class="input-group-addon">
+      <div class="radio">
+        <label><input type="radio" value="San Jose" name="city" aria-label="San Jose">San Jose</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" value="Redwood City" name="city" aria-label="Redwood City">Redwood City</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" value="Mountain View" name="city" aria-label="Mountain View">Mountain View</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" value="Palo Alto" name="city" aria-label="Palo Alto">Palo Alto</label>
+      </div>
+      <div class="radio">
+        <label id='San Francisco'><input type="radio" value="San Francisco" name="city" aria-label="San Francisco">San Francisco</label>
+      </div>
+    </div>
+  </div>
+  <input type="submit" value="submit" class="btn btn-default">
 </form>
