@@ -6,7 +6,7 @@ class CreateStations < ActiveRecord::Migration[5.0]
       t.float  :longitude, null: false
       t.integer :dock_count, null: false
       t.date    :installation_date, null: false
-      t.integer :city_id
+      # t.integer :city_id
     end
   end
 end
