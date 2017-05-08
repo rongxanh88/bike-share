@@ -26,7 +26,6 @@ RSpec.describe "user can navigate to all stations list and edit information" do
     fill_in 'station[longitude]', with: 32.33
     fill_in 'station[dock_count]', with: 22
     fill_in 'station[installation_date]', with: 22/12/2012
-    page.find("input[value='San Francisco']").click
     choose 'San Francisco'
     click_on 'submit'
     #user is redirected to stations page
