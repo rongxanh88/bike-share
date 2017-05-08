@@ -17,7 +17,6 @@ class BikeShareApp < Sinatra::Base
 
   get '/stations/:id' do
     @station = Station.find_by(id: params[:id])
-
     erb :"stations/show"
   end
 
@@ -28,12 +27,12 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/station/:id' do
-    station = Station.find_by(id: params[:id])
-    station.update_attributes(:name              => params[:name],
-                              :latitude          => params[:latitude],
-                              :longitude         => params[:longitude],
-                              :dock_count        => params[:dock_count],
-                              :installation_date => params[:installation_date])
+    station = Station.find(params[:id])
+    station.update_attributes(:name              => params[:station][:name],
+                              :latitude          => params[:station][:latitude],
+                              :longitude         => params[:station][:longitude],
+                              :dock_count        => params[:station][:dock_count],
+                              :installation_date => params[:station][:installation_date])
 
     redirect '/stations'
   end
@@ -45,21 +44,14 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/stations' do
-    station = Station.new(name: params[:name],
-                          latitude: params[:latitude],
-                          longitude: params[:longitude],
-                          dock_count: params[:dock_count],
-                          installation_date: params[:installation_date])
-
-    city = find_city_id(params[:city])
+    station = Station.create(name: params[:station][:name],
+                          latitude: params[:station][:latitude],
+                          longitude: params[:station][:longitude],
+                          dock_count: params[:station][:dock_count],
+                          installation_date: params[:station][:installation_date])
+    city = City.create_city_relationship(params[:city])
     station.update_attributes(:city_id => city)
-    station.save
     redirect '/stations'
-  end
-
-  def find_city_id(params)
-    city = City.find_by(name: params)
-    city.id
   end
 
   get '/station-dashboard' do
