@@ -1,5 +1,5 @@
 require_relative "../spec_helper"
-require 'pry'
+#require 'pry'
 
 RSpec.describe Trip do
   before(:each) do
@@ -31,17 +31,34 @@ RSpec.describe Trip do
 
     it "returns the station where most rides start" do
 
-      start_station = Trip.most_common_start_station
-      expect(start_station).to eq(66)
+      start_station = Trip.most_common_start_station_id
+      expect(start_station).to eq(62)
+    end
+
+    it "returns the station where the most rides end" do
+
+      end_station = Trip.most_common_end_station_id
+      expect(end_station).to eq(66)
+    end
+
+    it "returns number of rides by month" do
+
+      october_rides = Trip.rides_by_month(10, 2012)
+      expect(october_rides).to eq(2)
+    end
+
+    it "return number of rides per year" do
+
+      year1_rides = Trip.rides_by_year(2012)
+      expect(year1_rides).to eq(4)
     end
   end
 end
 
-  # Station with the most rides as a starting place.
-  # Station with the most rides as an ending place.
-  # Month by Month breakdown of number of rides with subtotals for each year.
-  # Most ridden bike with total number of rides for that bike.
-  # Least ridden bike with total number of rides for that bike.
-  # User subscription type breakout with both count and percentage.
-  # Single date with the highest number of trips with a count of those trips.
-  # Single date with the lowest number of trips with a count of those trips.
+
+# Month by Month breakdown of number of rides with subtotals for each year.
+# Most ridden bike with total number of rides for that bike.
+# Least ridden bike with total number of rides for that bike.
+# User subscription type breakout with both count and percentage.
+# Single date with the highest number of trips with a count of those trips.
+# Single date with the lowest number of trips with a count of those trips.
