@@ -1,12 +1,35 @@
 require_relative "../spec_helper"
 #require 'pry'
 
+#INNER JOIN STATION ID TO TABLE START STATION ID
+#Station.joins("INNER JOIN trips ON trips.start_station_id = station.id")
+
 RSpec.describe Trip do
   before(:each) do
     Trip.create!(duration: 63, start_date: '10/12/2012', end_date: '22/12/2012', start_station_id: 62, end_station_id: 66, bike_id: 520, subscription_id: 2)
     Trip.create!(duration: 85, start_date: '10/12/2012', end_date: '10/12/2012', start_station_id: 62, end_station_id: 62, bike_id: 520, subscription_id: 2)
     Trip.create!(duration: 70, start_date: '10/10/2012', end_date: '10/10/2012', start_station_id: 66, end_station_id: 66, bike_id: 520, subscription_id: 2)
-    Trip.create!(duration: 70, start_date: '10/10/2012', end_date: '10/10/2012', start_station_id: 84, end_station_id: 66, bike_id: 793, subscription_id: 1)
+    Trip.create!(duration: 70, start_date: '11/10/2012', end_date: '10/10/2012', start_station_id: 84, end_station_id: 66, bike_id: 793, subscription_id: 1)
+  end
+
+  describe "number of rides started at this station" do
+
+    it "returns the number of rides" do
+      station1 = Station.create(name: "Los Gatos", latitude: 33.33, longitude: 33.22, dock_count: 23, installation_date: '22/12/2012')
+
+      station2 = Station.create(name: "Los Hombres", latitude: 45.67, longitude: 95.12,
+      dock_count: 56, installation_date: '22/12/2012')
+
+      Trip.create!(duration: 63, start_date: '01/01/2013', end_date: '01/01/2013', start_station_id: 1, end_station_id: 2, bike_id: 520, subscription_id: 2)
+
+      Trip.create!(duration: 23, start_date: '01/01/2013', end_date: '01/01/2013', start_station_id: 1, end_station_id: 2, bike_id: 520, subscription_id: 2)
+
+      Trip.create!(duration: 63, start_date: '01/01/2013', end_date: '01/01/2013', start_station_id: 2, end_station_id: 1, bike_id: 520, subscription_id: 2)
+
+      trips_made = ""
+      #binding.pry
+      expect(trips_made).to eq(2)
+    end
   end
 
   describe "model method" do
@@ -85,12 +108,25 @@ RSpec.describe Trip do
       expect(percentage_of_a_sub_1).to eq(0.25)
     end
 
+    it "returns number of most rides by day" do
 
+      popular_day = Trip.most_common(:start_date)
+      day = '2012-12-10 00:00:00.000000000 +0000'
+      expect(popular_day).to eq(day)
+      number_of_rides = Trip.where(start_date: day).count
+      expect(number_of_rides).to eq(2)
+    end
+
+    it "returns number of least rides by day" do
+
+      unpopular_day = Trip.least_common(:start_date)
+      day = '2012-10-11 00:00:00.000000000 +0000'
+      expect(unpopular_day).to eq(day)
+      number_of_rides = Trip.where(start_date: day).count
+      expect(number_of_rides).to eq(1)
+    end
   end
 end
-
-# Single date with the highest number of trips with a count of those trips.
-# Single date with the lowest number of trips with a count of those trips.
 
 # On an individual station show page add the following information:
 #

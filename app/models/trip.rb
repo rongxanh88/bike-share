@@ -13,15 +13,6 @@ class Trip < ActiveRecord::Base
   validates :bike_id, presence: true
   validates :subscription_id, presence: true
 
-  # def self.generate_list_of_names(object)
-  #   if object.length == 1
-  #     #binding.pry
-  #     Array.new << object.first.name
-  #   else
-  #     object.map{ | item | item.name }.flatten
-  #   end
-  # end
-
   def self.avg(attribute)
     self.average(attribute).round(2)
   end
@@ -49,6 +40,5 @@ class Trip < ActiveRecord::Base
     self.where(subscription_id: sub_id).count
   end
 
-  
 
 end
