@@ -11,12 +11,11 @@ class Trip < ActiveRecord::Base
   validates :start_station_id, presence: true
   validates :end_station_id, presence: true
   validates :bike_id, presence: true
-<<<<<<< HEAD
   validates :subscription_id, presence: true
 
   def self.generate_list_of_names(object)
     if object.length == 1
-      binding.pry
+      #binding.pry
       Array.new << object.first.name
     else
       object.map{ | item | item.name }.flatten
@@ -30,8 +29,4 @@ class Trip < ActiveRecord::Base
   def self.most_common_start_station
     generate_list_of_names(self.where(start_station_id: self.maximum(:start_station_id)))
   end
-
-=======
-  validates :subscription_type_id, presence: true
->>>>>>> e2c1eb0879c5883546f1513da9e63f3405bf6074
 end
