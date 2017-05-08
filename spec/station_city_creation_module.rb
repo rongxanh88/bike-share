@@ -2,9 +2,9 @@
 module StationCityCreator
 
   def create_stations
-    station_1 = Station.create(name: "Phil", latitude: 33.33, longitude: 33.22, dock_count: 23, installation_date: '22/12/2012', city_id: 1)
-    station_2 = Station.create(name: "Triss", latitude: 33.33, longitude: 33.22, dock_count: 23, installation_date: '22/11/2012', city_id: 2)
-    station_3 = Station.create(name: "Dante", latitude: 33.33, longitude: 33.22, dock_count: 23, installation_date: '22/10/2012', city_id: 3)
+    # station_1 = Station.create(name: "Phil", latitude: 33.33, longitude: 33.22, dock_count: 23, installation_date: '22/12/2012', city_id: 1)
+    # station_2 = Station.create(name: "Triss", latitude: 33.33, longitude: 33.22, dock_count: 23, installation_date: '22/11/2012', city_id: 2)
+    # station_3 = Station.create(name: "Dante", latitude: 33.33, longitude: 33.22, dock_count: 23, installation_date: '22/10/2012', city_id: 3)
   end
 
   def create_cities

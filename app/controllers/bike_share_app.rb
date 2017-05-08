@@ -50,7 +50,6 @@ class BikeShareApp < Sinatra::Base
                           longitude: params[:station][:longitude],
                           dock_count: params[:station][:dock_count],
                           installation_date: params[:station][:installation_date])
-
     city = City.create_city_relationship(params[:city])
     station.update_attributes(:city_id => city)
     redirect '/stations'

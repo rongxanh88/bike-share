@@ -7,6 +7,7 @@ class City < ActiveRecord::Base
 
   def self.create_city_relationship(params)
     city = City.find_by(name: params)
+    binding.pry
     city.id
   end
 
