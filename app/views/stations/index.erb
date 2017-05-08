@@ -1,8 +1,5 @@
 
 <h1>Bike Stations</h1><br/>
-
-<a href="/stations/new"><h3>Create a New Station</h3></a>
-
 <% @stations.each do |station| %>
   <a href="/stations/<%= station.id %>"><p>Station: <%= station.name %></p></a>
   <!--<p>Latitude: <%= station.latitude %></p>
