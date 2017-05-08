@@ -1,0 +1,15 @@
+<h1>Bike Stations</h1><br/>
+<% @stations.each do |station| %>
+  <a href="/stations/<%= station.id %>"><p>Station: <%= station.name %></p></a>
+  <!--<p>Latitude: <%= station.latitude %></p>
+  <p>Longitude: <%= station.longitude %></p>-->
+  <p>Dock Count: <%= station.dock_count %></p>
+  <p>Installation Date: <%= station.installation_date %></p>
+  <p>City: <%= station.city.name %>
+  <br/>
+  <a href="/stations/<%= station.id %>/edit">Edit</a>
+  <form action="/stations/<%= station.id %>" method="post">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input type="submit" value="Delete" />
+  </form>
+<% end %>
