@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508171738) do
+ActiveRecord::Schema.define(version: 20170508215444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,14 +54,16 @@ ActiveRecord::Schema.define(version: 20170508171738) do
   end
 
   create_table "weathers", force: :cascade do |t|
-    t.date  "date",            null: false
-    t.float "max_temp",        null: false
-    t.float "mean_temp",       null: false
-    t.float "min_temp",        null: false
-    t.float "mean_humidity",   null: false
-    t.float "mean_visibility", null: false
-    t.float "mean_wind_speed", null: false
-    t.float "precipitation",   null: false
+    t.date    "date",            null: false
+    t.float   "max_temp",        null: false
+    t.float   "mean_temp",       null: false
+    t.float   "min_temp",        null: false
+    t.float   "mean_humidity",   null: false
+    t.float   "mean_visibility", null: false
+    t.float   "mean_wind_speed", null: false
+    t.float   "precipitation",   null: false
+    t.integer "city_id"
+    t.index ["city_id"], name: "index_weathers_on_city_id", using: :btree
   end
 
   create_table "zip_codes", force: :cascade do |t|
@@ -71,4 +73,5 @@ ActiveRecord::Schema.define(version: 20170508171738) do
   add_foreign_key "stations", "cities"
   add_foreign_key "trips", "subscriptions"
   add_foreign_key "trips", "zip_codes"
+  add_foreign_key "weathers", "cities"
 end

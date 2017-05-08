@@ -7,6 +7,10 @@ require './app/models/station_status'
 require './app/models/trip'
 require './app/models/subscription'
 
+weather_id = {
+  95113 => 1, 94063 => 2, 94041 => 3, 94301 => 4, 94107 => 5
+}
+
 def format_date(date)
     dt = date.split('/')
     dt[0], dt[1] = dt[1], dt[0]
