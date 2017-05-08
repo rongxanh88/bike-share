@@ -65,7 +65,7 @@ RSpec.describe Station do
       Station.create(name: "Station2", latitude: 33.22, longitude: 333.22, dock_count: 16, installation_date: '22/12/2012')
       Station.create(name: "Station3", latitude: 33.22, longitude: 333.22, dock_count: 18, installation_date: '22/12/2012')
 
-      dock_count = Station.fewest(:dock_count)
+      dock_count = Station.minimum(:dock_count)
       expect(dock_count).to eq(12)
     end
 
@@ -74,7 +74,7 @@ RSpec.describe Station do
       Station.create(name: "Station2", latitude: 33.22, longitude: 333.22, dock_count: 16, installation_date: '22/12/2012')
       Station.create(name: "Station3", latitude: 33.22, longitude: 333.22, dock_count: 18, installation_date: '22/12/2012')
 
-      dock_count = Station.most(:dock_count)
+      dock_count = Station.maximum(:dock_count)
       expect(dock_count).to eq(18)
     end
 
