@@ -26,14 +26,9 @@ class Trip < ActiveRecord::Base
     self.average(attribute).round(2)
   end
 
-  def self.most_common_start_station_id
-    station_ids = self.pluck(:start_station_id)
-    station_ids.max_by { |i| station_ids.count(i) }
-  end
-
-  def self.most_common_end_station_id
-    station_ids = self.pluck(:end_station_id)
-    station_ids.max_by { |i| station_ids.count(i) }
+  def self.most_common(of_attribute)
+    collection = self.pluck(of_attribute)
+    collection.max_by { |i| collection.count(i) }
   end
 
   def self.rides_by_month(month, year)
@@ -45,5 +40,8 @@ class Trip < ActiveRecord::Base
     self.where('extract(year from start_date) = ?', year).count
   end
 
+  def method_name
+
+  end
 
 end

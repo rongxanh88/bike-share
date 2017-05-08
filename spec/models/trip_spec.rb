@@ -5,7 +5,7 @@ RSpec.describe Trip do
   before(:each) do
     Trip.create!(duration: 63, start_date: '10/12/2012', end_date: '22/12/2012', start_station_id: 62, end_station_id: 66, bike_id: 520, subscription_id: 4)
     Trip.create!(duration: 85, start_date: '10/12/2012', end_date: '10/12/2012', start_station_id: 62, end_station_id: 62, bike_id: 520, subscription_id: 4)
-    Trip.create!(duration: 70, start_date: '10/10/2012', end_date: '10/10/2012', start_station_id: 66, end_station_id: 66, bike_id: 793, subscription_id: 2)
+    Trip.create!(duration: 70, start_date: '10/10/2012', end_date: '10/10/2012', start_station_id: 66, end_station_id: 66, bike_id: 520, subscription_id: 2)
     Trip.create!(duration: 70, start_date: '10/10/2012', end_date: '10/10/2012', start_station_id: 84, end_station_id: 66, bike_id: 793, subscription_id: 2)
   end
 
@@ -31,13 +31,13 @@ RSpec.describe Trip do
 
     it "returns the station where most rides start" do
 
-      start_station = Trip.most_common_start_station_id
+      start_station = Trip.most_common(:start_station_id)
       expect(start_station).to eq(62)
     end
 
     it "returns the station where the most rides end" do
 
-      end_station = Trip.most_common_end_station_id
+      end_station = Trip.most_common(:end_station_id)
       expect(end_station).to eq(66)
     end
 
@@ -47,10 +47,20 @@ RSpec.describe Trip do
       expect(october_rides).to eq(2)
     end
 
-    it "return number of rides per year" do
+    it "returns number of rides per year" do
 
       year1_rides = Trip.rides_by_year(2012)
       expect(year1_rides).to eq(4)
+    end
+
+    it "returns the most ridden bike" do
+
+      popular_bike = Trip.most_common(:bike_id)
+      expect(popular_bike).to eq(520)
+    end
+
+    it "returns the number of rides for a specific bike" do
+      
     end
   end
 end
