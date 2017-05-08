@@ -52,6 +52,7 @@ class BikeShareApp < Sinatra::Base
                           longitude: params[:longitude],
                           dock_count: params[:dock_count],
                           installation_date: params[:installation_date])
+
     station.save
     redirect '/stations'
   end
