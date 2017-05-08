@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508155609) do
+ActiveRecord::Schema.define(version: 20170508171738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cities", force: :cascade do |t|
-    t.text    "name",        null: false
-    t.integer "zip_code_id"
+    t.text "name", null: false
   end
 
   create_table "station_statuses", force: :cascade do |t|
@@ -34,6 +33,7 @@ ActiveRecord::Schema.define(version: 20170508155609) do
     t.integer "dock_count",        null: false
     t.date    "installation_date", null: false
     t.integer "city_id"
+    t.index ["city_id"], name: "index_stations_on_city_id", using: :btree
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -49,22 +49,26 @@ ActiveRecord::Schema.define(version: 20170508155609) do
     t.integer  "bike_id",          null: false
     t.integer  "zip_code_id"
     t.integer  "subscription_id"
+    t.index ["subscription_id"], name: "index_trips_on_subscription_id", using: :btree
+    t.index ["zip_code_id"], name: "index_trips_on_zip_code_id", using: :btree
   end
 
   create_table "weathers", force: :cascade do |t|
-    t.date    "date",            null: false
-    t.float   "max_temp",        null: false
-    t.float   "mean_temp",       null: false
-    t.float   "min_temp",        null: false
-    t.float   "mean_humidity",   null: false
-    t.float   "mean_visibility", null: false
-    t.float   "mean_wind_speed", null: false
-    t.float   "precipitation",   null: false
-    t.integer "city_id"
+    t.date  "date",            null: false
+    t.float "max_temp",        null: false
+    t.float "mean_temp",       null: false
+    t.float "min_temp",        null: false
+    t.float "mean_humidity",   null: false
+    t.float "mean_visibility", null: false
+    t.float "mean_wind_speed", null: false
+    t.float "precipitation",   null: false
   end
 
   create_table "zip_codes", force: :cascade do |t|
     t.integer "zip_code", null: false
   end
 
+  add_foreign_key "stations", "cities"
+  add_foreign_key "trips", "subscriptions"
+  add_foreign_key "trips", "zip_codes"
 end
