@@ -3,10 +3,10 @@ require_relative "../spec_helper"
 
 RSpec.describe Trip do
   before(:each) do
-    Trip.create!(duration: 63, start_date: '10/12/2012', end_date: '22/12/2012', start_station_id: 62, end_station_id: 66, bike_id: 520, subscription_id: 4)
-    Trip.create!(duration: 85, start_date: '10/12/2012', end_date: '10/12/2012', start_station_id: 62, end_station_id: 62, bike_id: 520, subscription_id: 4)
+    Trip.create!(duration: 63, start_date: '10/12/2012', end_date: '22/12/2012', start_station_id: 62, end_station_id: 66, bike_id: 520, subscription_id: 2)
+    Trip.create!(duration: 85, start_date: '10/12/2012', end_date: '10/12/2012', start_station_id: 62, end_station_id: 62, bike_id: 520, subscription_id: 2)
     Trip.create!(duration: 70, start_date: '10/10/2012', end_date: '10/10/2012', start_station_id: 66, end_station_id: 66, bike_id: 520, subscription_id: 2)
-    Trip.create!(duration: 70, start_date: '10/10/2012', end_date: '10/10/2012', start_station_id: 84, end_station_id: 66, bike_id: 793, subscription_id: 2)
+    Trip.create!(duration: 70, start_date: '10/10/2012', end_date: '10/10/2012', start_station_id: 84, end_station_id: 66, bike_id: 793, subscription_id: 1)
   end
 
   describe "model method" do
@@ -59,16 +59,45 @@ RSpec.describe Trip do
       expect(popular_bike).to eq(520)
     end
 
-    it "returns the number of rides for a specific bike" do
-      
+    it "returns the least ridden bike" do
+
+      unpopular_bike = Trip.least_common(:bike_id)
+      expect(unpopular_bike).to eq(793)
     end
+
+    it "returns the number of rides for a specific bike" do
+
+      number_of_rides = Trip.where(bike_id: 520).count
+      expect(number_of_rides).to eq(3)
+    end
+
+    it "returns the number of subscription types" do
+
+      num_of_subscriptions = Trip.number_of_subscriptions(1)
+      expect(num_of_subscriptions).to eq(1)
+    end
+
+    it "returns percentage of total subscriptions per type" do
+
+      total_sub_type_1 = Trip.number_of_subscriptions(1)
+      total_sub_type_2 = Trip.number_of_subscriptions(2)
+      percentage_of_a_sub_1 = total_sub_type_1/(total_sub_type_1 + total_sub_type_2).to_f.round(2)
+      expect(percentage_of_a_sub_1).to eq(0.25)
+    end
+
+
   end
 end
 
-
-# Month by Month breakdown of number of rides with subtotals for each year.
-# Most ridden bike with total number of rides for that bike.
-# Least ridden bike with total number of rides for that bike.
-# User subscription type breakout with both count and percentage.
 # Single date with the highest number of trips with a count of those trips.
 # Single date with the lowest number of trips with a count of those trips.
+
+# On an individual station show page add the following information:
+#
+# Number of rides started at this station.
+# Number of rides ended at this station.
+# Most frequent destination station (for rides that began at this station).
+# Most freuqnet origination station (for rides that ended at this station).
+# Date with the highest number of trips started at this station.
+# Most frequent zip code for users starting trips at this station.
+# Bike ID most frequently starting a trip at this station.

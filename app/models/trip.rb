@@ -1,4 +1,4 @@
-#require 'pry'
+require 'pry'
 
 class Trip < ActiveRecord::Base
   default_scope { order(start_date: :desc) }
@@ -31,6 +31,11 @@ class Trip < ActiveRecord::Base
     collection.max_by { |i| collection.count(i) }
   end
 
+  def self.least_common(of_attribute)
+    collection = self.pluck(of_attribute)
+    collection.min_by { |i| collection.count(i) }
+  end
+
   def self.rides_by_month(month, year)
     year_array = self.where('extract(year from start_date) = ?', year)
     year_array.where('extract(month from start_date) = ?', month).count
@@ -40,8 +45,10 @@ class Trip < ActiveRecord::Base
     self.where('extract(year from start_date) = ?', year).count
   end
 
-  def method_name
-
+  def self.number_of_subscriptions(sub_id)
+    self.where(subscription_id: sub_id).count
   end
+
+  
 
 end
