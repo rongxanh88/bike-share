@@ -10,6 +10,4 @@ class Trip < ActiveRecord::Base
   validates :end_station_id, presence: true
   validates :bike_id, presence: true
   validates :subscription_type_id, presence: true
-
-
 end
