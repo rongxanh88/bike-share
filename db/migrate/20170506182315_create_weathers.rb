@@ -9,7 +9,7 @@ class CreateWeathers < ActiveRecord::Migration[5.0]
       t.float   :mean_visibility, null: false
       t.float   :mean_wind_speed, null: false
       t.float   :precipitation, null: false
-      t.integer :zip_code_id, null: false
+      # t.integer :zip_code_id, null: false
     end
   end
 end
