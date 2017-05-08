@@ -1,4 +1,4 @@
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 # RSpec.describe "user can navigate to jockies n stuff" do
 #   it "they see jockies" do
 #     #user navigates to home page
@@ -28,7 +28,7 @@ RSpec.describe "user can navigate to all stations list and edit information" do
 
   it "they can create a station" do
   expect(current_path).to eq('/stations')
-  save_and_open_page
+  # save_and_open_page
 
   end
 end

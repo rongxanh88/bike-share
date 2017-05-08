@@ -1,4 +1,4 @@
 class Subscription < ActiveRecord::Base
   belongs_to :trips
-  validates :subscription, presence: true
+  validates :name, presence: true
 end
