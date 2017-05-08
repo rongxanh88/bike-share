@@ -53,13 +53,13 @@ class BikeShareApp < Sinatra::Base
                           dock_count: params[:dock_count],
                           installation_date: params[:installation_date])
 
-    city = create_city_relationship(params[:city])
+    city = find_city_id(params[:city])
     station.update_attributes(:city_id => city)
     station.save
     redirect '/stations'
   end
 
-  def create_city_relationship(params)
+  def find_city_id(params)
     city = City.find_by(name: params)
     city.id
   end
