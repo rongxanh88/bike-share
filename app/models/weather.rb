@@ -1,4 +1,6 @@
 class Weather < ActiveRecord::Base
+  default_scope { order(date: :desc) }
+
   belongs_to :city
 
   validates :date, presence: true
