@@ -32,6 +32,6 @@ RSpec.describe "user can navigate to all stations list and edit information" do
     expect(current_path).to eq('/stations')
     #user can see the newly created station
     # expect(page).to have_content("Phil")
-    save_and_open_page
+    # save_and_open_page
     end
 end
