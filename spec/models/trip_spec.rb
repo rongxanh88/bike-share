@@ -3,6 +3,7 @@ require 'pry'
 
 #INNER JOIN STATION ID TO TABLE START STATION ID
 #Station.joins("INNER JOIN trips ON trips.start_station_id = station.id")
+#remove this line after commit
 
 RSpec.describe Trip do
   before(:each) do
