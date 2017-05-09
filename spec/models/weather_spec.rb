@@ -55,7 +55,7 @@ RSpec.describe Trip do
   describe "model method" do
     it "returns max temp" do
       max_temp = Weather.maximum(:max_temp)
-      max_temp_city = Weather.maximum(:max_temp).name
+      max_temp_city = Weather.maximum(:max_temp)
       binding.pry
     end
   end
