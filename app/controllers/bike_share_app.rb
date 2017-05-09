@@ -118,4 +118,11 @@ class BikeShareApp < Sinatra::Base
     trip.save
     redirect '/trips'
   end
+
+  get '/trip-dashboard' do
+    @trip = Trip
+    @station = Station
+
+    erb :"trips/trip-dashboard"
+  end
 end

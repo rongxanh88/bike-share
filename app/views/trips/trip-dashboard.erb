@@ -1,0 +1,29 @@
+
+<h1>Trip Dashboard</h1>
+
+<h3>Average Bikes Available per Station: <%= @trip.avg(:duration) %></h3>
+<h3>Longest Ride: <%= @trip.maximum(:duration) %></h3>
+<h3>Shortest Ride: <%= @trip.minimum(:duration) %></h3>
+<% start_station_id = @trip.most_common(:start_station_id) %>
+<% end_station_id = @trip.most_common(:end_station_id) %>
+<h3>The station where the most rides began: <%= @station.find_by(id: start_station_id).name %></h3>
+<h3>The station where the most rides ended: <%= @station.find_by(id: end_station_id).name %></h3>
+
+
+<!--
+
+Month by Month breakdown of number of rides with subtotals for each year.
+Most ridden bike with total number of rides for that bike.
+Least ridden bike with total number of rides for that bike.
+User subscription type breakout with both count and percentage.
+Single date with the highest number of trips with a count of those trips.
+Single date with the lowest number of trips with a count of those trips.
+On an individual station show page add the following information:
+
+Number of rides started at this station.
+Number of rides ended at this station.
+Most frequent destination station (for rides that began at this station).
+Most freuqnet origination station (for rides that ended at this station).
+Date with the highest number of trips started at this station.
+Most frequent zip code for users starting trips at this station.
+Bike ID most frequently starting a trip at this station. -->

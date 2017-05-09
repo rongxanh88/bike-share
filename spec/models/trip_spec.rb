@@ -56,6 +56,7 @@ RSpec.describe Trip do
     it "returns the station where most rides start" do
 
       start_station = Trip.most_common(:start_station_id)
+      binding.pry
       expect(start_station).to eq(62)
     end
 
