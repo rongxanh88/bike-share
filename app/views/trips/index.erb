@@ -1,15 +1,22 @@
-<h1>Bike Stations</h1><br/>
-<% @stations.each do |station| %>
-  <a href="/stations/<%= station.id %>"><p>Station: <%= station.name %></p></a>
-  <!--<p>Latitude: <%= station.latitude %></p>
-  <p>Longitude: <%= station.longitude %></p>-->
-  <p>Dock Count: <%= station.dock_count %></p>
-  <p>Installation Date: <%= station.installation_date %></p>
-  <p>City: <%= station.city.name %>
+<h1>Bike Trips</h1><br/>
+<% @trips.each do |trip| %>
+  <% start_station = Station.find_by(id: trip.start_station_id) %>
+  <% end_station = Station.find_by(id: trip.end_station_id) %>
+  <% zip_code = Zip_Code.find_by(id: trip.zip_code_id) %>
+  <% subscription = Subscription.find_by(id: trip.subscription_id) %>
+
+  <a href="/trips/<%= trip.id %>"><p>Trip: <%= trip.id %></p></a>
+  <p>Start Date: <%= trip.start_date %></p>
+  <p>End Date: <%= trip.end_date %></p>
+  <p>Duration: <%= trip.duration %></p>
+  <p>Start Station Name: <%= start_station.name %></p>
+  <p>End Station Name: <%= end_station.name %></p>
+  <p>User Zip Code: <%= zip_code.zip_code %></p>
+  <p>User Account: <%= subscription.name %></p>
   <br/>
-  <a href="/stations/<%= station.id %>/edit">Edit</a>
-  <form action="/stations/<%= station.id %>" method="post">
+  <a href="/trips/<%= trip.id %>/edit">Edit</a><!--
+  <form action="/trips/<%= trip.id %>" method="post">
     <input type="hidden" name="_method" value="DELETE" />
-    <input type="submit" value="Delete" />
+    <input type="submit" value="Delete" /> -->
   </form>
 <% end %>

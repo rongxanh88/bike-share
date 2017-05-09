@@ -23,9 +23,9 @@ def format_datetime(date)
   hour = split_time[0].to_i
   min = split_time[1].to_i
   sec = 0
-  utc_offset = "-08:00"
+  # utc_offset = "-08:00"
 
-  DateTime.new(year, month, day, hour, min, sec, utc_offset)
+  DateTime.new(year, month, day, hour, min, sec)
 end
 
 CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |row|
