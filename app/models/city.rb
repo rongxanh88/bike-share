@@ -1,7 +1,7 @@
 class City < ActiveRecord::Base
   has_many :stations
   validates :name, presence: true, uniqueness: true
-  belongs_to :weathers
+  has_many :weathers
   validates :name, presence: true, uniqueness: true
 
   def self.create_city_relationship(params)
