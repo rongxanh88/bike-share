@@ -213,5 +213,4 @@ class BikeShareApp < Sinatra::Base
     redirect '/conditions'
   end
 
->>>>>>> development
 end
