@@ -1,5 +1,6 @@
 require_relative "../spec_helper"
 require_relative "../station_city_creation_module"
+require_relative '../../app/models/weather.rb'
 require "pry"
 
 RSpec.describe Trip do
@@ -49,6 +50,11 @@ RSpec.describe Trip do
     it "returns weather" do
       weather_by_date = Weather.where(date: "2013-12-22").count
       expect(weather_by_date).to eq(2)
+    end
+
+    it "returns weather for user date" do
+      input = (Weather.weather_by_date("2013-12-22")).count
+      expect(input).to eq(2)
     end
   end
 
