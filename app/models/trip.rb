@@ -1,6 +1,3 @@
-# require 'will_paginate'
-# require 'will_paginate/active_record'
-
 class Trip < ActiveRecord::Base
   default_scope { order(start_date: :desc) }
 
