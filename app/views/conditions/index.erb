@@ -1,0 +1,19 @@
+
+<h1>Weather Conditions</h1><br/>
+<% @conditions.each do |condition| %>
+  <a href="/condition/<%= condition.id %>"><p>View Details for: <%= condition.date %></p></a>
+  <p>City: <%= condition.city.name %>
+  <p>Max Temp: <%= condition.max_temp %></p>
+  <p>Mean Temp: <%= condition.mean_temp %></p>
+  <p>Min Temp: <%= condition.min_temp %></p>
+  <p>Mean Humidity: <%= condition.mean_humidity %></p>
+  <p>Mean Visibility: <%= condition.mean_visibility %></p>
+  <p>Mean Wind Speed: <%= condition.mean_wind_speed %></p>
+  <p>Precipitation: <%= condition.precipitation %></p>
+  <br/>
+  <a href="/condition/<%= condition.id %>/edit">Edit</a>
+  <form action="/condition/<%= condition.id %>" method="post">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input type="submit" value="Delete" />
+  </form>
+<% end %>

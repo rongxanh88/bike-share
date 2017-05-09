@@ -1,4 +1,6 @@
-require "pry"
+require 'will_paginate'
+require 'will_paginate/active_record'
+require 'pry'
 
 class BikeShareApp < Sinatra::Base
   get '/stations' do
@@ -63,7 +65,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    @trips = Trip.all
+    @trips = Trip.all.paginate(:page => params[:page], :per_page => 30)
 
     erb :"trips/index"
   end
@@ -73,34 +75,59 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips/:id' do
-    @station = Trip.find_by(id: params[:id])
+    @trip = Trip.find_by(id: params[:id])
+    @trip_info = @trip.get_info
 
     erb :"trips/show"
   end
 
   get '/trips/:id/edit' do
-    @station = trip.find_by(id: params[:id])
+    @trip = Trip.find_by(id: params[:id])
+    @trip_info = @trip.get_info
 
     erb :"trips/edit"
   end
 
   put '/trips/:id' do
-    trip = trip.find_by(id: params[:id])
-    trip.update_attributes(duration: params[:duration],
+    binding.pry
+    trip = Trip.find_by(id: params[:id])
+    start_station = Station.find_by(name: params[:start_station])
+    end_station = Station.find_by(name: params[:end_station])
+    subscription = Subscription.find_by(name: params[:subscription])
+    zip_code = ZipCode.find_or_create_by(zip_code: params[:zip_code].to_i)
+
+    trip.update_attributes(duration: params[:duration].to_i,
                           start_date: params[:start_date],
                           end_date: params[:end_date],
-                          start_id_station: params[:start_id_station],
-                          end_id_station: params[:end_id_station],
-                          bike_id: params[:bike_id],
-                          subscription_type: params[:subscription_type],
-                          zip_code_id: params[:zip_code_id]
+                          start_station_id: start_station.id,
+                          end_station_id: end_station.id,
+                          bike_id: params[:bike_id].to_i,
+                          subscription_id: subscription.id,
+                          zip_code_id: zip_code.id
                           )
-
     redirect '/trips'
   end
 
+  put '/create_trips' do
+    start_station = Station.find_by(name: params[:start_station])
+    end_station = Station.find_by(name: params[:end_station])
+    subscription = Subscription.find_by(name: params[:subscription])
+    zip_code = ZipCode.find_or_create_by(zip_code: params[:zip_code].to_i)
+
+    trip = Trip.find_or_create_by(duration: params[:duration].to_i,
+                          start_date: params[:start_date],
+                          end_date: params[:end_date],
+                          start_station_id: start_station.id,
+                          end_station_id: end_station.id,
+                          bike_id: params[:bike_id].to_i,
+                          subscription_id: subscription.id,
+                          zip_code_id: zip_code.id
+                          )
+    redirect "/trips/#{trip.id}"
+  end
+
   delete '/trips/:id' do
-    trip.find_by(id: params[:id]).destroy
+    Trip.find_by(id: params[:id]).destroy
 
     redirect '/trips'
   end
@@ -125,4 +152,66 @@ class BikeShareApp < Sinatra::Base
 
     erb :"trips/trip-dashboard"
   end
+
+  get '/conditions' do
+    @conditions = Weather.all
+    erb :"conditions/index"
+  end
+
+  get '/condition/:id' do
+    @condition = Weather.find(params[:id])
+    city_id = @condition.city_id
+    @city = City.find(city_id)
+    erb :"conditions/show"
+  end
+
+  get '/conditions/new' do
+    @cities = City.all
+    erb :"conditions/new"
+  end
+
+  get '/condition/:id/edit' do
+    @condition = Weather.find(params[:id])
+    @cities = City.all
+    erb :"conditions/edit"
+  end
+
+  post '/conditions' do
+    condition = Weather.new(date: params[:condition][:date],
+                          max_temp: params[:condition][:max_temp],
+                          mean_temp: params[:condition][:mean_temp],
+                          min_temp: params[:condition][:min_temp],
+                          mean_humidity: params[:condition][:mean_humidity],
+                          mean_visibility: params[:condition][:mean_visibility],
+                          mean_wind_speed: params[:condition][:mean_wind_speed],
+                          precipitation: params[:condition][:precipitation])
+
+    city = City.find_by(name: params[:city])
+    condition.update_attributes(:city_id => city.id)
+    condition.save
+    redirect '/conditions'
+  end
+
+  put '/condition/:id' do
+    condition = Weather.find(params[:id])
+    condition.update_attributes(:date              => params[:condition][:date],
+                              :max_temp          => params[:condition][:max_temp],
+                              :mean_temp         => params[:condition][:mean_temp],
+                              :min_temp        => params[:condition][:min_temp],
+                              :mean_humidity => params[:condition][:mean_humidity],
+                              :mean_visibility => params[:condition][:mean_visibility],
+                              :mean_wind_speed => params[:condition][:mean_wind_speed],
+                              :precipitation => params[:condition][:precipitation],
+                              :city_id => params[:city])
+
+    redirect '/conditions'
+  end
+
+  delete '/condition/:id' do
+    Weather.find_by(id: params[:id]).destroy
+
+    redirect '/conditions'
+  end
+
+>>>>>>> development
 end

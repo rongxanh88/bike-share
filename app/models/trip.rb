@@ -1,4 +1,6 @@
 require 'pry'
+require 'will_paginate'
+require 'will_paginate/active_record'
 
 class Trip < ActiveRecord::Base
   default_scope { order(start_date: :desc) }
@@ -12,6 +14,16 @@ class Trip < ActiveRecord::Base
   validates :end_station_id, presence: true
   validates :bike_id, presence: true
   validates :subscription_id, presence: true
+
+  def get_info
+    info = {}
+    info[:start_station] = Station.find_by(id: self.start_station_id)
+    info[:end_station] = Station.find_by(id: self.end_station_id)
+    info[:zip_code] = ZipCode.find_by(id: self.zip_code_id)
+    info[:subscription] = Subscription.find_by(id: self.subscription_id)
+
+    return info
+  end
 
   def self.avg(attribute)
     self.average(attribute).round(2)
