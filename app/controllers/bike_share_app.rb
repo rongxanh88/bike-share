@@ -118,4 +118,38 @@ class BikeShareApp < Sinatra::Base
     trip.save
     redirect '/trips'
   end
+
+  get '/conditions' do
+    @conditions = Weather.all
+    erb :"conditions/index"
+  end
+
+  get '/conditions/:id' do
+    @weather_for_day = Weather.find(id: params[:id])
+    erb :"conditions/show"
+  end
+
+  get '/conditions/new' do
+    erb :"conditions/new"
+  end
+
+  get '/conditions/:id/edit' do
+    @conditions = Weather.find(id: params[:id])
+    erb :"conditions/edit"
+  end
+
+  post '/conditions' do
+    condition = condition.new(date: params[:date],
+                          max_temp: params[:max_temp],
+                          mean_temp: params[:mean_temp],
+                          min_temp: params[:min_temp],
+                          mean_humidity: params[:mean_humidity],
+                          mean_visibility: params[:mean_visibility],
+                          mean_wind_speed: params[:mean_wind_speed],
+                          precipitation: params[:precipitation]
+                          )
+    condition.save
+    redirect '/conditions'
+  end
+
 end
