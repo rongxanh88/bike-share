@@ -47,10 +47,10 @@ class BikeShareApp < Sinatra::Base
 
   post '/stations' do
     station = Station.create(name: params[:station][:name],
-                          latitude: params[:station][:latitude],
-                          longitude: params[:station][:longitude],
-                          dock_count: params[:station][:dock_count],
-                          installation_date: params[:station][:installation_date])
+                            latitude: params[:station][:latitude],
+                            longitude: params[:station][:longitude],
+                            dock_count: params[:station][:dock_count],
+                            installation_date: params[:station][:installation_date])
     city = City.create_city_relationship(params[:city])
     station.update_attributes(:city_id => city)
     redirect '/stations'
@@ -60,6 +60,12 @@ class BikeShareApp < Sinatra::Base
     @station = Station
 
     erb :"stations/station-dashboard"
+  end
+
+  get '/trips' do
+    @trips = Trip.all
+
+    erb :"trips/index"
   end
 
   get '/trips/new' do

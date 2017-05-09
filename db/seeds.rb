@@ -6,10 +6,14 @@ require './app/models/zip_code'
 require './app/models/station_status'
 require './app/models/trip'
 require './app/models/subscription'
+require './app/models/weather'
 
-weather_id = {
-  95113 => 1, 94063 => 2, 94041 => 3, 94301 => 4, 94107 => 5
-}
+def validate_rows(input)
+  if input == nil
+    input = 0
+  end
+  input
+end
 
 def format_date(date)
     dt = date.split('/')
@@ -27,9 +31,9 @@ def format_datetime(date)
   hour = split_time[0].to_i
   min = split_time[1].to_i
   sec = 0
-  utc_offset = "-08:00"
+  # utc_offset = "-08:00"
 
-  DateTime.new(year, month, day, hour, min, sec, utc_offset)
+  DateTime.new(year, month, day, hour, min, sec)
 end
 
 CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |row|
@@ -75,6 +79,35 @@ CSV.foreach "db/csv/trip_fixture.csv", headers: true, header_converters: :symbol
   p "creating Trip: #{start_station.name} to #{end_station.name}."
 end
 
+
+CSV.foreach "db/csv/weather.csv", headers: true, header_converters: :symbol do |row|
+  #94107 = San Fran
+  #94063 = Redwood City
+  #94301 = Palo Alto
+  #95113 = San jose
+  #94041 = Mountain View
+  zip_codes = {"94107" => "San Francisco",
+               "94063" => "Redwood City",
+               "94301" => "Palo Alto",
+               "95113" => "San Jose",
+               "94041" => "Mountain View"}
+
+  city = zip_codes[row[:zip_code]]
+  city_id = ((City.find_by(name: city).id))
+  city_name = ((City.find_by(name: city).name))
+
+  Weather.create!(date: format_date(row[:date]),
+                  max_temp: validate_rows(row[:max_temperature_f]),
+                  mean_temp: validate_rows(row[:mean_temperature_f]),
+                  min_temp: validate_rows(row[:min_temperature_f]),
+                  mean_humidity: validate_rows(row[:mean_humidity]),
+                  mean_visibility: validate_rows(row[:mean_visibility_miles]),
+                  mean_wind_speed: validate_rows(row[:mean_wind_speed_mph]),
+                  precipitation: validate_rows(row[:precipitation_inches]),
+                  city_id: city_id)
+
+  p "Adding weather for #{city_name}."
+end
 # CSV.foreach "db/csv/status.csv", headers: true, header_converters: :symbol do |row|
 #   StationStatus.create(station_id: row[:station_id],
 #                        bikes_available: row[:bikes_available],

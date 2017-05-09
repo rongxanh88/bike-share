@@ -9,14 +9,6 @@ RSpec.describe City do
     end
   end
 
-  describe ".zip_code_id" do
-    it "returns the zip code id for one of five cities" do
-      city = City.create(name: "San Jose", zip_code_id: 5)
-
-      expect(city.zip_code_id).to eq(5)
-    end
-  end
-
   describe "validations" do
     it "is invalid without a name" do
       city = City.create
