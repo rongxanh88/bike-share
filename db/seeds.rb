@@ -32,6 +32,22 @@ def format_datetime(date)
   DateTime.new(year, month, day, hour, min, sec)
 end
 
+def validate_station(station_name)
+  case station_name
+  when "Broadway at Main"
+    station = "Stanford in Redwood City"
+  when "San Jose Government Center"
+    station = "Santa Clara County Civic Center"
+  when "Post at Kearny"
+    station = "Post at Kearney"
+  when "Washington at Kearny"
+    station = "Washington at Kearney"
+  else
+    station = station_name
+  end
+  station
+end
+
 CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |row|
   city = City.find_or_create_by(name: row[:city])
   city.stations.create!(name: row[:name],
@@ -49,35 +65,11 @@ CSV.foreach "db/csv/trip_fixture.csv", headers: true, header_converters: :symbol
   subscription = Subscription.find_or_create_by(name: row[:subscription_type])
   zip_code = ZipCode.find_or_create_by(zip_code: row[:zip_code].to_i)
 
-  start_station_name = row[:start_station_name]
-  end_station_name = row[:end_station_name]
+  start_station_name = validate_station(row[:start_station_name])
+  end_station_name = validate_station(row[:end_station_name])
 
-  if start_station_name == "Broadway at Main"
-    start_station_name = "Stanford in Redwood City"
-  elsif end_station_name == "Broadway at Main"
-    end_station_name = "Stanford in Redwood City"
-  end
-
-  if start_station_name == "San Jose Government Center"
-    start_station_name = "Santa Clara County Civic Center"
-  elsif end_station_name == "San Jose Government Center"
-    end_station_name = "Santa Clara County Civic Center"
-  end
-
-  if start_station_name == "Post at Kearny"
-    start_station_name = "Post at Kearney"
-  elsif end_station_name == "Post at Kearny"
-    end_station_name = "Post at Kearney"
-  end
-
-  if start_station_name == "Washington at Kearny"
-    start_station_name = "Washington at Kearney"
-  elsif end_station_name == "Washington at Kearny"
-    end_station_name = "Washington at Kearney"
-  end
-
-  start_station = Station.find_by(name: row[:start_station_name])
-  end_station = Station.find_by(name: row[:end_station_name])
+  start_station = Station.find_by(name: start_station_name)
+  end_station = Station.find_by(name: end_station_name)
 
   start_date = format_datetime(row[:start_date])
   end_date = format_datetime(row[:end_date])
