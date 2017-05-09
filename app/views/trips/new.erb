@@ -1,0 +1,39 @@
+<h1>Create a New Trip</h1><br/>
+
+<form action="/create_trips" method="post">
+  <input type="hidden" name="_method" value="PUT"/>
+  <h4>New Trip</h4>
+  <div class="input-group">
+  Start Date:
+    <input type="text" name="start_date" class="form-control" value="" id="trip_start_date_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  End Date:
+    <input type="text" name="end_date" class="form-control" value="" id="trip_end_date_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  Duration:
+    <input type="text" name="duration" class="form-control" value="" id="trip_duration_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  Start Station:
+    <input type="text" name="start_station" class="form-control" value="" id="trip_start_station_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  End Station:
+    <input type="text" name="end_station" class="form-control" value="" id="trip_end_station_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  Bike ID:
+    <input type="text" name="bike_id" class="form-control" value="" id="trip_bike_id_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  Zip Code:
+    <input type="text" name="zip_code" class="form-control" value="" id="trip_zip_code_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  Subscription:
+    <input type="text" name="subscription" class="form-control" value="" id="trip_subscription_input" aria-describedby="basic-addon3">
+  </div>
+  <input type="submit" value="Create Trip" class="btn btn-default">
+</form>

@@ -5,6 +5,7 @@ gem 'pg'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'haml'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'shotgun'

@@ -32,6 +32,22 @@ def format_datetime(date)
   DateTime.new(year, month, day, hour, min, sec)
 end
 
+def validate_station(station_name)
+  case station_name
+  when "Broadway at Main"
+    station = "Stanford in Redwood City"
+  when "San Jose Government Center"
+    station = "Santa Clara County Civic Center"
+  when "Post at Kearny"
+    station = "Post at Kearney"
+  when "Washington at Kearny"
+    station = "Washington at Kearney"
+  else
+    station = station_name
+  end
+  station
+end
+
 CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |row|
   city = City.find_or_create_by(name: row[:city])
   city.stations.create!(name: row[:name],
@@ -41,7 +57,7 @@ CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |
                 installation_date: format_date(row[:installation_date]),
                 city: city)
 
-  p "Creating Station #{row[:name]}, and City #{row[:city]} "
+  puts "Creating Station #{row[:name]}, and City #{row[:city]} "
 end
 
 #load trip fixtures
@@ -49,20 +65,11 @@ CSV.foreach "db/csv/trip_fixture.csv", headers: true, header_converters: :symbol
   subscription = Subscription.find_or_create_by(name: row[:subscription_type])
   zip_code = ZipCode.find_or_create_by(zip_code: row[:zip_code].to_i)
 
-  start_station = Station.find_by(name: row[:start_station_name])
-  end_station = Station.find_by(name: row[:end_station_name])
+  start_station_name = validate_station(row[:start_station_name])
+  end_station_name = validate_station(row[:end_station_name])
 
-  if row[:start_station_name] == "Broadway at Main"
-    start_station = Station.find_by(name: "Stanford in Redwood City")
-  elsif row[:end_station_name] == "Broadway at Main"
-    end_station = Station.find_by(name: "Stanford in Redwood City")
-  end
-
-  if row[:start_station_name] == "San jose Government Center"
-    start_station = Station.find_by(name: "Santa Clara County Civic Center")
-  elsif row[:end_station_name] == "San jose Government Center"
-    end_station = Station.find_by(name: "Santa Clara County Civic Center")
-  end
+  start_station = Station.find_by(name: start_station_name)
+  end_station = Station.find_by(name: end_station_name)
 
   start_date = format_datetime(row[:start_date])
   end_date = format_datetime(row[:end_date])
@@ -72,7 +79,7 @@ CSV.foreach "db/csv/trip_fixture.csv", headers: true, header_converters: :symbol
               end_station_id: end_station.id, bike_id: row[:bike_id].to_i,
               zip_code_id: zip_code.id, subscription_id: subscription.id)
 
-  p "creating Trip: #{start_station.name} to #{end_station.name}."
+  puts "creating Trip: #{start_station.name} to #{end_station.name}."
 end
 
 
@@ -97,7 +104,7 @@ CSV.foreach "db/csv/weather.csv", headers: true, header_converters: :symbol do |
                   precipitation: validate_rows(row[:precipitation_inches]),
                   city_id: city_id)
 
-  p "Adding weather for #{city_name}."
+  puts "Adding weather for #{city_name}."
 end
 
 # CSV.foreach "db/csv/status.csv", headers: true, header_converters: :symbol do |row|
