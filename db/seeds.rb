@@ -57,7 +57,7 @@ CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |
                 installation_date: format_date(row[:installation_date]),
                 city: city)
 
-  p "Creating Station #{row[:name]}, and City #{row[:city]} "
+  puts "Creating Station #{row[:name]}, and City #{row[:city]} "
 end
 
 #load trip fixtures
@@ -79,7 +79,7 @@ CSV.foreach "db/csv/trip_fixture.csv", headers: true, header_converters: :symbol
               end_station_id: end_station.id, bike_id: row[:bike_id].to_i,
               zip_code_id: zip_code.id, subscription_id: subscription.id)
 
-  p "creating Trip: #{start_station.name} to #{end_station.name}."
+  puts "creating Trip: #{start_station.name} to #{end_station.name}."
 end
 
 
@@ -104,7 +104,7 @@ CSV.foreach "db/csv/weather.csv", headers: true, header_converters: :symbol do |
                   precipitation: validate_rows(row[:precipitation_inches]),
                   city_id: city_id)
 
-  p "Adding weather for #{city_name}."
+  puts "Adding weather for #{city_name}."
 end
 
 # CSV.foreach "db/csv/status.csv", headers: true, header_converters: :symbol do |row|

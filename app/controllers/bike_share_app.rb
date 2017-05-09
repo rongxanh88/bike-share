@@ -1,5 +1,6 @@
 require 'will_paginate'
 require 'will_paginate/active_record'
+require 'pry'
 
 class BikeShareApp < Sinatra::Base
   get '/stations' do
@@ -89,22 +90,44 @@ class BikeShareApp < Sinatra::Base
 
   put '/trips/:id' do
     binding.pry
-    trip = trip.find_by(id: params[:id])
-    trip.update_attributes(duration: params[:duration],
+    trip = Trip.find_by(id: params[:id])
+    start_station = Station.find_by(name: params[:start_station])
+    end_station = Station.find_by(name: params[:end_station])
+    subscription = Subscription.find_by(name: params[:subscription])
+    zip_code = ZipCode.find_or_create_by(zip_code: params[:zip_code].to_i)
+
+    trip.update_attributes(duration: params[:duration].to_i,
                           start_date: params[:start_date],
                           end_date: params[:end_date],
-                          start_id_station: params[:start_id_station],
-                          end_id_station: params[:end_id_station],
-                          bike_id: params[:bike_id],
-                          subscription_type: params[:subscription_type],
-                          zip_code_id: params[:zip_code_id]
+                          start_station_id: start_station.id,
+                          end_station_id: end_station.id,
+                          bike_id: params[:bike_id].to_i,
+                          subscription_id: subscription.id,
+                          zip_code_id: zip_code.id
                           )
-
     redirect '/trips'
   end
 
+  put '/create_trips' do
+    start_station = Station.find_by(name: params[:start_station])
+    end_station = Station.find_by(name: params[:end_station])
+    subscription = Subscription.find_by(name: params[:subscription])
+    zip_code = ZipCode.find_or_create_by(zip_code: params[:zip_code].to_i)
+
+    trip = Trip.find_or_create_by(duration: params[:duration].to_i,
+                          start_date: params[:start_date],
+                          end_date: params[:end_date],
+                          start_station_id: start_station.id,
+                          end_station_id: end_station.id,
+                          bike_id: params[:bike_id].to_i,
+                          subscription_id: subscription.id,
+                          zip_code_id: zip_code.id
+                          )
+    redirect "/trips/#{trip.id}"
+  end
+
   delete '/trips/:id' do
-    trip.find_by(id: params[:id]).destroy
+    Trip.find_by(id: params[:id]).destroy
 
     redirect '/trips'
   end
