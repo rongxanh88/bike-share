@@ -13,6 +13,9 @@
     <input type="text" name="condition[mean_temp]" class="form-control" value="<%= @condition.mean_temp %>" aria-describedby="basic-addon3">
   </div>
   <div class="input-group">
+    <input type="text" name="condition[min_temp]" class="form-control" value="<%= @condition.min_temp %>" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
     <input type="text" name="condition[mean_humidity]" class="form-control" value="<%= @condition.mean_humidity %>" aria-describedby="basic-addon3">
   </div>
   <div class="input-group">
@@ -24,7 +27,7 @@
   <div class="input-group">
     <input type="text" name="condition[precipitation]" class="form-control" value="<%= @condition.precipitation %>" aria-describedby="basic-addon3">
   </div>
-  
+
   <div class="input-group">
     <div class="input-group-addon">
       <% @cities.each do |city| %>

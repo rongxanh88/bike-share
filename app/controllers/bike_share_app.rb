@@ -134,7 +134,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/conditions/:id/edit' do
-    @conditions = Weather.find(id: params[:id])
+    @condition = Weather.find(params[:id])
     @cities = City.all
     erb :"conditions/edit"
   end
