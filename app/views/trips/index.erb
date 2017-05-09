@@ -13,10 +13,9 @@
   <p>End Station Name: <%= end_station.name %></p>
   <p>User Zip Code: <%= zip_code.zip_code %></p>
   <p>User Account: <%= subscription.name %></p>
-  <br/>
-  <a href="/trips/<%= trip.id %>/edit">Edit</a><!--
+  <a href="/trips/<%= trip.id %>/edit">Edit</a>
   <form action="/trips/<%= trip.id %>" method="post">
     <input type="hidden" name="_method" value="DELETE" />
-    <input type="submit" value="Delete" /> -->
-  </form>
+    <input type="submit" value="Delete" />
+  </form><br/>
 <% end %>

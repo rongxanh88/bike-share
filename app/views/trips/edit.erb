@@ -1,0 +1,35 @@
+<h1>Trip Editor</h1><br/>
+
+<form action="/trip/<%= @trip.id %>" method="post">
+  <input type="hidden" name="_method" value="PUT"/>
+  <h4>Edit Trip</h4>
+  <div class="input-group">
+  Start Date:
+    <input type="text" name="trip[start_date]" class="form-control" value="<%= @trip.start_date %>" id="trip_start_date_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  End Date:
+    <input type="text" name="trip[end_date]" class="form-control" value="<%= @trip.end_date %>" id="trip_end_date_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  Duration:
+    <input type="text" name="trip[duration]" class="form-control" value="<%= @trip.duration %>" id="trip_duration_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  Start Station:
+    <input type="text" name="trip[start_station]" class="form-control" value="<%= @trip_info[:start_station].name %>" id="trip_start_station_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  End Station:
+    <input type="text" name="trip[end_station]" class="form-control" value="<%= @trip_info[:end_station].name %>" id="trip_end_station_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  Zip Code:
+    <input type="text" name="trip[zip_code]" class="form-control" value="<%= @trip_info[:zip_code].zip_code %>" id="trip_zip_code_input" aria-describedby="basic-addon3">
+  </div>
+  <div class="input-group">
+  Subscription:
+    <input type="text" name="trip[subscription]" class="form-control" value="<%= @trip_info[:subscription].name %>" id="trip_subscription_input" aria-describedby="basic-addon3">
+  </div>
+  <input type="submit" value="Update Trip" class="btn btn-default">
+</form>

@@ -1,4 +1,5 @@
-require "pry"
+require 'will_paginate'
+require 'will_paginate/active_record'
 
 class BikeShareApp < Sinatra::Base
   get '/stations' do
@@ -63,7 +64,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    @trips = Trip.all
+    @trips = Trip.all.paginate(:page => params[:page], :per_page => 30)
 
     erb :"trips/index"
   end
@@ -73,18 +74,21 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips/:id' do
-    @station = Trip.find_by(id: params[:id])
+    @trip = Trip.find_by(id: params[:id])
+    @trip_info = @trip.get_info
 
     erb :"trips/show"
   end
 
   get '/trips/:id/edit' do
-    @station = trip.find_by(id: params[:id])
+    @trip = Trip.find_by(id: params[:id])
+    @trip_info = @trip.get_info
 
     erb :"trips/edit"
   end
 
   put '/trips/:id' do
+    binding.pry
     trip = trip.find_by(id: params[:id])
     trip.update_attributes(duration: params[:duration],
                           start_date: params[:start_date],
