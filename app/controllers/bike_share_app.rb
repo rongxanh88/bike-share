@@ -217,8 +217,8 @@ class BikeShareApp < Sinatra::Base
   get '/conditions-dashboard' do
     @trip = Trip
     @station = Station
-    @condition = Condition
-    binding.pry
+    @condition = Weather
+    
     erb :"stations/station-dashboard"
   end
 end
