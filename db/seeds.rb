@@ -9,10 +9,7 @@ require './app/models/subscription'
 require './app/models/weather'
 
 def validate_rows(input)
-  if input == nil
-    input = 0
-  end
-  input
+  input.nil? ? input = 0 : input
 end
 
 def format_date(date)
@@ -31,7 +28,6 @@ def format_datetime(date)
   hour = split_time[0].to_i
   min = split_time[1].to_i
   sec = 0
-  # utc_offset = "-08:00"
 
   DateTime.new(year, month, day, hour, min, sec)
 end
@@ -39,8 +35,8 @@ end
 CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |row|
   city = City.find_or_create_by(name: row[:city])
   city.stations.create!(name: row[:name],
-                latitude: row[:latitude].to_f,
-                longitude: row[:longitude].to_f,
+                latitude: row[:lat].to_f,
+                longitude: row[:long].to_f,
                 dock_count: row[:dock_count],
                 installation_date: format_date(row[:installation_date]),
                 city: city)
@@ -51,7 +47,7 @@ end
 #load trip fixtures
 CSV.foreach "db/csv/trip_fixture.csv", headers: true, header_converters: :symbol do |row|
   subscription = Subscription.find_or_create_by(name: row[:subscription_type])
-  zip_code = Zip_Code.find_or_create_by(zip_code: row[:zip_code].to_i)
+  zip_code = ZipCode.find_or_create_by(zip_code: row[:zip_code].to_i)
 
   start_station = Station.find_by(name: row[:start_station_name])
   end_station = Station.find_by(name: row[:end_station_name])
@@ -81,11 +77,6 @@ end
 
 
 CSV.foreach "db/csv/weather.csv", headers: true, header_converters: :symbol do |row|
-  #94107 = San Fran
-  #94063 = Redwood City
-  #94301 = Palo Alto
-  #95113 = San jose
-  #94041 = Mountain View
   zip_codes = {"94107" => "San Francisco",
                "94063" => "Redwood City",
                "94301" => "Palo Alto",
@@ -108,6 +99,7 @@ CSV.foreach "db/csv/weather.csv", headers: true, header_converters: :symbol do |
 
   p "Adding weather for #{city_name}."
 end
+
 # CSV.foreach "db/csv/status.csv", headers: true, header_converters: :symbol do |row|
 #   StationStatus.create(station_id: row[:station_id],
 #                        bikes_available: row[:bikes_available],
