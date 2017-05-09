@@ -1,6 +1,6 @@
 require_relative "../spec_helper"
 
-RSpec.describe Zip_Code do
+RSpec.describe ZipCode do
   describe ".zip_code" do
     it "returns the zip code" do
       zip = ZipCode.create(zip_code: 90210)
