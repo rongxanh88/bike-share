@@ -21,21 +21,11 @@
   </div>
   <div class="input-group">
     <div class="input-group-addon">
-      <div class="radio">
-        <label><input type="radio" value="San Jose" name="city" aria-label="San Jose">San Jose</label>
-      </div>
-      <div class="radio">
-        <label><input type="radio" value="Redwood City" name="city" aria-label="Redwood City">Redwood City</label>
-      </div>
-      <div class="radio">
-        <label><input type="radio" value="Mountain View" name="city" aria-label="Mountain View">Mountain View</label>
-      </div>
-      <div class="radio">
-        <label><input type="radio" value="Palo Alto" name="city" aria-label="Palo Alto">Palo Alto</label>
-      </div>
-      <div class="radio">
-        <label id='San Francisco'><input type="radio" value="San Francisco" name="city" aria-label="San Francisco">San Francisco</label>
-      </div>
+      <% @cities.each do |city| %>
+        <div class="radio">
+          <label><input type="radio" value="<%= city.name %>" name="city" aria-label="<%= city.name %>"><%= city.name %></label>
+        </div>
+      <% end %>
     </div>
   </div>
   <input type="submit" value="submit" class="btn btn-default">

@@ -12,6 +12,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/stations/new' do
+    @cities = City.all
     erb :"stations/new"
   end
 
@@ -22,7 +23,7 @@ class BikeShareApp < Sinatra::Base
 
   get '/stations/:id/edit' do
     @station = Station.find_by(id: params[:id])
-
+    @cities = City.all
     erb :"stations/edit"
   end
 
@@ -32,7 +33,8 @@ class BikeShareApp < Sinatra::Base
                               :latitude          => params[:station][:latitude],
                               :longitude         => params[:station][:longitude],
                               :dock_count        => params[:station][:dock_count],
-                              :installation_date => params[:station][:installation_date])
+                              :installation_date => params[:station][:installation_date],
+                              :city_id => params[:city])
 
     redirect '/stations'
   end
