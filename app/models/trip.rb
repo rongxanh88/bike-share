@@ -68,8 +68,16 @@ class Trip < ActiveRecord::Base
     self.where(start_station_id: start_station_id).pluck(:start_date)
   end
 
+  def self.rides_on_day(date)
+    self.where(start_date: date).count
+  end
+
   def self.bikes_started_per_station(start_station_id)
     self.where(start_station_id: start_station_id).pluck(:bike_id)
+  end
+
+  def self.times_ridden(bike_id)
+    self.where(bike_id: bike_id).count
   end
 
   private
