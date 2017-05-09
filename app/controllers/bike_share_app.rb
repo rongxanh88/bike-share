@@ -213,4 +213,12 @@ class BikeShareApp < Sinatra::Base
 
     redirect '/conditions'
   end
+
+  get '/conditions-dashboard' do
+    @trip = Trip
+    @station = Station
+    @condition = Condition
+    binding.pry
+    erb :"stations/station-dashboard"
+  end
 end
