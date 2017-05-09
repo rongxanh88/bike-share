@@ -1,5 +1,6 @@
 require 'will_paginate'
 require 'will_paginate/active_record'
+require 'will_paginate/collection'
 require 'pry'
 
 class BikeShareApp < Sinatra::Base
@@ -145,4 +146,5 @@ class BikeShareApp < Sinatra::Base
     trip.save
     redirect '/trips'
   end
+
 end
