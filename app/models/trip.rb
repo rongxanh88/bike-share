@@ -19,12 +19,14 @@ class Trip < ActiveRecord::Base
 
   def self.most_common(of_attribute)
     collection = self.pluck(of_attribute)
-    collection.max_by { |i| collection.count(i) }
+    m_common_of(collection)
+    #collection.max_by { |i| collection.count(i) }
   end
 
   def self.least_common(of_attribute)
     collection = self.pluck(of_attribute)
-    collection.min_by { |i| collection.count(i) }
+    l_common_of(collection)
+    #collection.min_by { |i| collection.count(i) }
   end
 
   def self.rides_by_month(month, year)
@@ -40,5 +42,37 @@ class Trip < ActiveRecord::Base
     self.where(subscription_id: sub_id).count
   end
 
+  def self.started_at(station)
+    self.where(start_station_id: station)
+  end
+
+  def self.ended_at(station)
+    self.where(end_station_id: station)
+  end
+
+  def end_stations_per_start_station(start_station_id)
+    self.where(start_station_id: start_station_id).pluck(:end_station_id)
+  end
+
+  def start_stations_per_end_station(end_station_id)
+    self.where(end_station_id: end_station_id).pluck(:start_station_id)
+  end
+
+  def start_date_per_station(start_station_id)
+    self.where(start_station_id: start_station_id).pluck(:start_date)
+  end
+
+  def bikes_started_per_station(start_station_id)
+    self.where(start_station_id: start_station_id).pluck(:bike_id)
+  end
+
+  private #???
+
+  def m_common_of(collection) #name needs to change but waiting on tests to work in order to do so efficiently
+    collection.max_by { |i| collection.count(i) }
+  end
+
+  def l_common_of(collection) #name needs to change but waiting on tests to work in order to do so efficiently
+  end
 
 end
