@@ -152,4 +152,22 @@ class BikeShareApp < Sinatra::Base
     redirect '/conditions'
   end
 
+  put '/condition/:id' do
+    condition = condition.find(params[:id])
+    condition.update_attributes(:name              => params[:condition][:name],
+                              :latitude          => params[:condition][:latitude],
+                              :longitude         => params[:condition][:longitude],
+                              :dock_count        => params[:condition][:dock_count],
+                              :installation_date => params[:condition][:installation_date],
+                              :city_id => params[:city])
+
+    redirect '/conditions'
+  end
+
+  delete '/conditions/:id' do
+    condition.find_by(id: params[:id]).destroy
+
+    redirect '/conditions'
+  end
+
 end
