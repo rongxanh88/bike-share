@@ -154,12 +154,15 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/condition/:id' do
-    condition = condition.find(params[:id])
-    condition.update_attributes(:name              => params[:condition][:name],
-                              :latitude          => params[:condition][:latitude],
-                              :longitude         => params[:condition][:longitude],
-                              :dock_count        => params[:condition][:dock_count],
-                              :installation_date => params[:condition][:installation_date],
+    condition = Weather.find(params[:id])
+    condition.update_attributes(:date              => params[:condition][:date],
+                              :max_temp          => params[:condition][:max_temp],
+                              :mean_temp         => params[:condition][:mean_temp],
+                              :min_temp        => params[:condition][:min_temp],
+                              :mean_humidity => params[:condition][:mean_humidity],
+                              :mean_visibility => params[:condition][:mean_visibility],
+                              :mean_wind_speed => params[:condition][:mean_wind_speed],
+                              :precipitation => params[:condition][:precipitation],
                               :city_id => params[:city])
 
     redirect '/conditions'
