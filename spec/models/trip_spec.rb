@@ -7,11 +7,16 @@ require 'pry'
 
 RSpec.describe Trip do
   before(:each) do
+    subscriber = Subscription.create(name: "subscriber")
+    customer = Subscription.create(name: "customer")
+
     bike = Bike.new(name: 0987)
+
     Trip.create!(duration: 63, start_date: '10/12/2012', end_date: '22/12/2012', start_station_id: 62, end_station_id: 66, bike_id: bike.id, subscription_id: 2)
     Trip.create!(duration: 85, start_date: '10/12/2012', end_date: '10/12/2012', start_station_id: 62, end_station_id: 62, bike_id: 520, subscription_id: 2)
     Trip.create!(duration: 70, start_date: '10/10/2012', end_date: '10/10/2012', start_station_id: 66, end_station_id: 66, bike_id: 520, subscription_id: 2)
     Trip.create!(duration: 70, start_date: '11/10/2012', end_date: '10/10/2012', start_station_id: 84, end_station_id: 66, bike_id: 793, subscription_id: 1)
+
   end
 
   describe "number of rides started at this station" do
@@ -144,16 +149,16 @@ RSpec.describe Trip do
 
     it "returns the most common end station id for each start station" do
 
-    end_stations_collection = end_stations_per_start_station(1)
-    popular_end_station = m_common_of(end_stations_collection)
-    expect(popular_end_station).to eq(3)
+      end_stations_collection = end_stations_per_start_station(1)
+      popular_end_station = m_common_of(end_stations_collection)
+      expect(popular_end_station).to eq(3)
     end
 
     it "returns the most frequent origination station id for each end station" do
 
-    start_stations_collection = start_stations_per_end_station(1)
-    popular_start_station = m_common_of(start_stations_collection)
-    expect(popular_start_station).to eq(3)
+      start_stations_collection = start_stations_per_end_station(1)
+      popular_start_station = m_common_of(start_stations_collection)
+      expect(popular_start_station).to eq(3)
     end
 
     it "returns the most popular date for trips started at each station" do
