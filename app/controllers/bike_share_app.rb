@@ -146,6 +146,13 @@ class BikeShareApp < Sinatra::Base
     redirect '/trips'
   end
 
+  get '/trip-dashboard' do
+    @trip = Trip
+    @station = Station
+
+    erb :"trips/trip-dashboard"
+  end
+
   get '/conditions' do
     @conditions = Weather.all
     erb :"conditions/index"
@@ -206,4 +213,5 @@ class BikeShareApp < Sinatra::Base
     redirect '/conditions'
   end
 
+>>>>>>> development
 end

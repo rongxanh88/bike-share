@@ -83,6 +83,12 @@ RSpec.describe Trip do
       expect(popular_bike).to eq(520)
     end
 
+    it "returns number of rides for specific bike" do
+
+      rides = Trip.times_ridden(520)
+      expect(rides).to eq(3)
+    end
+
     it "returns the least ridden bike" do
 
       unpopular_bike = Trip.least_common(:bike_id)
@@ -116,6 +122,13 @@ RSpec.describe Trip do
       expect(popular_day).to eq(day)
       number_of_rides = Trip.where(start_date: day).count
       expect(number_of_rides).to eq(2)
+    end
+
+    it "returns the number of rides in a day" do
+
+      day = '2012-12-10 00:00:00.000000000 +0000'
+      num_rides = Trip.rides_on_day(day)
+      expect(num_rides).to eq(2)
     end
 
     it "returns number of least rides by day" do
