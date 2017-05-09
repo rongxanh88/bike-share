@@ -1,9 +1,11 @@
 require 'will_paginate'
 require 'will_paginate/active_record'
-require 'will_paginate/collection'
+#require 'will_paginate/collection'
 require 'pry'
 
 class BikeShareApp < Sinatra::Base
+  include WillPaginate::Sinatra::Helpers
+
   get '/stations' do
     @stations = Station.all
     erb :"stations/index"
@@ -66,7 +68,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    @trips = Trip.all.paginate(:page => params[:page], :per_page => 30)
+    @trips = Trip.paginate(:page => params[:page], :per_page => 30)
 
     erb :"trips/index"
   end

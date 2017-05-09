@@ -1,4 +1,5 @@
 <h1>Bike Trips</h1><br/>
+<%= will_paginate @trips, :container => false %>
 <% @trips.each do |trip| %>
   <% start_station = Station.find_by(id: trip.start_station_id) %>
   <% end_station = Station.find_by(id: trip.end_station_id) %>
