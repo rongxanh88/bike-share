@@ -107,6 +107,7 @@ CSV.foreach "db/csv/weather.csv", headers: true, header_converters: :symbol do |
   puts "Adding weather for #{city_name}."
 end
 
+
 # CSV.foreach "db/csv/status.csv", headers: true, header_converters: :symbol do |row|
 #   StationStatus.create(station_id: row[:station_id],
 #                        bikes_available: row[:bikes_available],

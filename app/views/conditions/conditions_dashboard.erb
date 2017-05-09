@@ -1,0 +1,143 @@
+<!--
+<h1>Trip Dashboard</h1>
+
+<h3>Average Bikes Available per Station: <%= @trip.avg(:duration) %></h3>
+<h3>Longest Ride: <%= @trip.maximum(:duration) %></h3>
+<h3>Shortest Ride: <%= @trip.minimum(:duration) %></h3>
+<% start_station_id = @trip.most_common(:start_station_id) %>
+<% end_station_id = @trip.most_common(:end_station_id) %>
+<h3>The station where the most rides began: <%= @station.find_by(id: start_station_id).name %></h3>
+<h3>The station where the most rides ended: <%= @station.find_by(id: end_station_id).name %></h3>
+
+  <table>
+    <tr>
+      <th>Month</th>
+      <th>2012</th>
+      <th>2013</th>
+    </tr>
+
+    <tr>
+      <td>January</td>
+      <td><%= @trip.rides_by_month(0, 2012) %></td>
+      <td><%= @trip.rides_by_month(0, 2013) %></td>
+    </tr>
+
+
+    <tr>
+      <td>February</td>
+      <td><%= @trip.rides_by_month(1, 2012) %></td>
+      <td><%= @trip.rides_by_month(1, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>March</td>
+      <td><%= @trip.rides_by_month(2, 2012) %></td>
+      <td><%= @trip.rides_by_month(2, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>April</td>
+      <td><%= @trip.rides_by_month(3, 2012) %></td>
+      <td><%= @trip.rides_by_month(3, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>May</td>
+      <td><%= @trip.rides_by_month(4, 2012) %></td>
+      <td><%= @trip.rides_by_month(4, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>June</td>
+      <td><%= @trip.rides_by_month(5, 2012) %></td>
+      <td><%= @trip.rides_by_month(5, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>July</td>
+      <td><%= @trip.rides_by_month(6, 2012) %></td>
+      <td><%= @trip.rides_by_month(6, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>August</td>
+      <td><%= @trip.rides_by_month(7, 2012) %></td>
+      <td><%= @trip.rides_by_month(7, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>September</td>
+      <td><%= @trip.rides_by_month(8, 2012) %></td>
+      <td><%= @trip.rides_by_month(8, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>October</td>
+      <td><%= @trip.rides_by_month(9, 2012) %></td>
+      <td><%= @trip.rides_by_month(9, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>November</td>
+      <td><%= @trip.rides_by_month(10, 2012) %></td>
+      <td><%= @trip.rides_by_month(10, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>December</td>
+      <td><%= @trip.rides_by_month(11, 2012) %></td>
+      <td><%= @trip.rides_by_month(11, 2013) %></td>
+    </tr>
+
+    <tr>
+      <td>Totals</td>
+      <td><%= @trip.rides_by_year(2012) %></td>
+      <td><%= @trip.rides_by_year(2013) %></td>
+    </tr>
+  </table>
+<% popular_bike = @trip.most_common(:bike_id) %>
+<h3>The most ridden bike: <%= popular_bike %></h3>
+<h4>Times ridden: <%= @trip.times_ridden(popular_bike) %></h4>
+<% unpopular_bike = @trip.least_common(:bike_id) %>
+<h3>The least ridden bike: <%= unpopular_bike %></h3>
+<h4>Times ridden: <%= @trip.times_ridden(unpopular_bike) %></h4>
+
+<table>
+  <% customers = @trip.number_of_subscriptions(2) %>
+  <% subscribers = @trip.number_of_subscriptions(1) %>
+
+  <tr>
+    <th>Subscriptions</th>
+    <th>Count</th>
+    <th>Percentage</th>
+  </tr>
+  <tr>
+    <th>Customer</th>
+    <th><%= customers %></th>
+    <th><%= ((customers * 100)/(customers + subscribers)).to_f  %>%</th>
+  </tr>
+  <tr>
+    <th>Subscriber</th>
+    <th><%= subscribers %></th>
+    <th><%= ((subscribers * 100)/(customers + subscribers)).to_f %>%</th>
+  </tr>
+</table>
+
+<% pd = @trip.most_common(:start_date) %>
+<h3>Date with the most trips: <%= pd.month %>, <%= pd.day %> <%= pd.year %></h3>
+<h4>Rides on Day: <%= @trip.rides_on_day(pd) %></h4>
+
+-->
+
+<!--
+Single date with the highest number of trips with a count of those trips.
+Single date with the lowest number of trips with a count of those trips.
+On an individual station show page add the following information:
+
+Number of rides started at this station.
+Number of rides ended at this station.
+Most frequent destination station (for rides that began at this station).
+Most freuqnet origination station (for rides that ended at this station).
+Date with the highest number of trips started at this station.
+Most frequent zip code for users starting trips at this station.
+Bike ID most frequently starting a trip at this station. -->
