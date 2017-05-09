@@ -49,20 +49,35 @@ CSV.foreach "db/csv/trip_fixture.csv", headers: true, header_converters: :symbol
   subscription = Subscription.find_or_create_by(name: row[:subscription_type])
   zip_code = ZipCode.find_or_create_by(zip_code: row[:zip_code].to_i)
 
+  start_station_name = row[:start_station_name]
+  end_station_name = row[:end_station_name]
+
+  if start_station_name == "Broadway at Main"
+    start_station_name = "Stanford in Redwood City"
+  elsif end_station_name == "Broadway at Main"
+    end_station_name = "Stanford in Redwood City"
+  end
+
+  if start_station_name == "San Jose Government Center"
+    start_station_name = "Santa Clara County Civic Center"
+  elsif end_station_name == "San Jose Government Center"
+    end_station_name = "Santa Clara County Civic Center"
+  end
+
+  if start_station_name == "Post at Kearny"
+    start_station_name = "Post at Kearney"
+  elsif end_station_name == "Post at Kearny"
+    end_station_name = "Post at Kearney"
+  end
+
+  if start_station_name == "Washington at Kearny"
+    start_station_name = "Washington at Kearney"
+  elsif end_station_name == "Washington at Kearny"
+    end_station_name = "Washington at Kearney"
+  end
+
   start_station = Station.find_by(name: row[:start_station_name])
   end_station = Station.find_by(name: row[:end_station_name])
-
-  if row[:start_station_name] == "Broadway at Main"
-    start_station = Station.find_by(name: "Stanford in Redwood City")
-  elsif row[:end_station_name] == "Broadway at Main"
-    end_station = Station.find_by(name: "Stanford in Redwood City")
-  end
-
-  if row[:start_station_name] == "San jose Government Center"
-    start_station = Station.find_by(name: "Santa Clara County Civic Center")
-  elsif row[:end_station_name] == "San jose Government Center"
-    end_station = Station.find_by(name: "Santa Clara County Civic Center")
-  end
 
   start_date = format_datetime(row[:start_date])
   end_date = format_datetime(row[:end_date])

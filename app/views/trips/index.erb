@@ -2,7 +2,7 @@
 <% @trips.each do |trip| %>
   <% start_station = Station.find_by(id: trip.start_station_id) %>
   <% end_station = Station.find_by(id: trip.end_station_id) %>
-  <% zip_code = Zip_Code.find_by(id: trip.zip_code_id) %>
+  <% zip_code = ZipCode.find_by(id: trip.zip_code_id) %>
   <% subscription = Subscription.find_by(id: trip.subscription_id) %>
 
   <a href="/trips/<%= trip.id %>"><p>Trip: <%= trip.id %></p></a>

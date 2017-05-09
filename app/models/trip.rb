@@ -40,5 +40,4 @@ class Trip < ActiveRecord::Base
     self.where(subscription_id: sub_id).count
   end
 
-
 end
