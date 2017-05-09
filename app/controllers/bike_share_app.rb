@@ -145,4 +145,65 @@ class BikeShareApp < Sinatra::Base
     trip.save
     redirect '/trips'
   end
+
+  get '/conditions' do
+    @conditions = Weather.all
+    erb :"conditions/index"
+  end
+
+  get '/condition/:id' do
+    @condition = Weather.find(params[:id])
+    city_id = @condition.city_id
+    @city = City.find(city_id)
+    erb :"conditions/show"
+  end
+
+  get '/conditions/new' do
+    @cities = City.all
+    erb :"conditions/new"
+  end
+
+  get '/condition/:id/edit' do
+    @condition = Weather.find(params[:id])
+    @cities = City.all
+    erb :"conditions/edit"
+  end
+
+  post '/conditions' do
+    condition = Weather.new(date: params[:condition][:date],
+                          max_temp: params[:condition][:max_temp],
+                          mean_temp: params[:condition][:mean_temp],
+                          min_temp: params[:condition][:min_temp],
+                          mean_humidity: params[:condition][:mean_humidity],
+                          mean_visibility: params[:condition][:mean_visibility],
+                          mean_wind_speed: params[:condition][:mean_wind_speed],
+                          precipitation: params[:condition][:precipitation])
+
+    city = City.find_by(name: params[:city])
+    condition.update_attributes(:city_id => city.id)
+    condition.save
+    redirect '/conditions'
+  end
+
+  put '/condition/:id' do
+    condition = Weather.find(params[:id])
+    condition.update_attributes(:date              => params[:condition][:date],
+                              :max_temp          => params[:condition][:max_temp],
+                              :mean_temp         => params[:condition][:mean_temp],
+                              :min_temp        => params[:condition][:min_temp],
+                              :mean_humidity => params[:condition][:mean_humidity],
+                              :mean_visibility => params[:condition][:mean_visibility],
+                              :mean_wind_speed => params[:condition][:mean_wind_speed],
+                              :precipitation => params[:condition][:precipitation],
+                              :city_id => params[:city])
+
+    redirect '/conditions'
+  end
+
+  delete '/condition/:id' do
+    Weather.find_by(id: params[:id]).destroy
+
+    redirect '/conditions'
+  end
+
 end
