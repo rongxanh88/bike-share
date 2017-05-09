@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508215444) do
+ActiveRecord::Schema.define(version: 20170509232017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,12 @@ ActiveRecord::Schema.define(version: 20170508215444) do
     t.integer  "subscription_id"
     t.index ["subscription_id"], name: "index_trips_on_subscription_id", using: :btree
     t.index ["zip_code_id"], name: "index_trips_on_zip_code_id", using: :btree
+  end
+
+  create_table "trips_weathers", id: false, force: :cascade do |t|
+    t.integer "weather_id", null: false
+    t.integer "trip_id",    null: false
+    t.index ["weather_id", "trip_id"], name: "index_trips_weathers_on_weather_id_and_trip_id", using: :btree
   end
 
   create_table "weathers", force: :cascade do |t|
