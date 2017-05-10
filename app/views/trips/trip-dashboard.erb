@@ -122,12 +122,13 @@
   </tr>
 </table>
 
-<h1>NEEDS TO PARSE OUT DATE FROM TIME FORMAT</h1>
-<% pd = @trip.most_common(:start_date) %>
-<h3>Date with the most trips: <%= pd.month %>, <%= pd.day %> <%= pd.year %></h3>
+<% pd = @trip.pluck(:start_date) %>
+<% date = pd.map(&:to_date) %>
+<h3>Date with the most trips: <%= date.max_by{ |i| date.count( i ) } %></h3>
 <h4>Rides on Day: <%= @trip.rides_on_day(pd) %></h4>
-<% upd = @trip.least_common(:start_date) %>
-<h3>Date with the least trips: <%= upd.month %>, <%= upd.day %> <%= upd.year %></h3>
+<% upd = @trip.pluck(:start_date) %>
+<% udate = upd.map(&:to_date) %>
+<h3>Date with the least trips: <%= date.min_by{ |i| date.count( i ) } %></h3>
 <h4>Rides on Day: <%= @trip.rides_on_day(upd) %></h4>
 
 <h2>All Stations</h2>
