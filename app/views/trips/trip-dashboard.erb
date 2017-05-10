@@ -1,15 +1,33 @@
 
 <h1>Trip Dashboard</h1>
+<div class="col-md-12">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <span class="badge"><%= @trip.avg(:duration) %></span>
+      Average Bikes Available per Station:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @trip.maximum(:duration) %></span>
+      Longest Ride:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @trip.minimum(:duration) %></span>
+      Shortest Ride:
+    </li>
+    <% start_station_id = @trip.most_common(:start_station_id) %>
+    <% end_station_id = @trip.most_common(:end_station_id) %>
+    <li class="list-group-item">
+      <span class="badge"><%= @station.find_by(id: start_station_id).name %></span>
+      The station where the most rides began:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @station.find_by(id: end_station_id).name %></span>
+      The station where the most rides ended:
+    </li>
+  </ul>
 
-<h3>Average Bikes Available per Station: <%= @station.avg(:dock_count) %></h3>
-<h3>Longest Ride: <%= @trip.maximum(:duration) %></h3>
-<h3>Shortest Ride: <%= @trip.minimum(:duration) %></h3>
-<% start_station_id = @trip.most_common(:start_station_id) %>
-<% end_station_id = @trip.most_common(:end_station_id) %>
-<h3>The station where the most rides began: <%= @station.find_by(id: start_station_id).name %></h3>
-<h3>The station where the most rides ended: <%= @station.find_by(id: end_station_id).name %></h3>
 
-  <table>
+  <table class="table table-hover">
     <tr>
       <th>Month</th>
       <th>2013</th>
@@ -108,82 +126,143 @@
       <td><%= @trip.rides_by_year(2015) %></td>
     </tr>
   </table>
-<% popular_bike = @trip.most_common(:bike_id) %>
-<h3>The most ridden bike: <%= popular_bike %></h3>
-<h4>Times ridden: <%= @trip.times_ridden(popular_bike) %></h4>
-<% unpopular_bike = @trip.least_common(:bike_id) %>
-<h3>The least ridden bike: <%= unpopular_bike %></h3>
-<h4>Times ridden: <%= @trip.times_ridden(unpopular_bike) %></h4>
 
-<table>
-  <% customers = @trip.number_of_subscriptions(2) %>
-  <% subscribers = @trip.number_of_subscriptions(1) %>
+  <ul class="list-group">
+    <% popular_bike = @trip.most_common(:bike_id) %>
+    <% unpopular_bike = @trip.least_common(:bike_id) %>
+    <li class="list-group-item">
+      <span class="badge"><%= popular_bike %></span>
+      The most ridden bike:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @trip.times_ridden(popular_bike) %></span>
+      Times ridden:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= unpopular_bike %></span>
+      The least ridden bike:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @trip.times_ridden(unpopular_bike) %></span>
+      Times ridden:
+    </li>
+  </ul>
 
-  <tr>
-    <th>Subscriptions</th>
-    <th>Count</th>
-    <th>Percentage</th>
-  </tr>
-  <tr>
-    <th>Customer</th>
-    <th><%= customers %></th>
-    <th><%= ((customers * 100)/(customers + subscribers)).to_f  %>%</th>
-  </tr>
-  <tr>
-    <th>Subscriber</th>
-    <th><%= subscribers %></th>
-    <th><%= ((subscribers * 100)/(customers + subscribers)).to_f %>%</th>
-  </tr>
-</table>
+  <table class="table table-hover">
+    <% customers = @trip.number_of_subscriptions(2) %>
+    <% subscribers = @trip.number_of_subscriptions(1) %>
 
-<% pd = @trip.pluck(:start_date) %>
-<% date = pd.map(&:to_date) %>
-<h3>Date with the most trips: <%= date.max_by{ |i| date.count( i ) } %></h3>
-<h4>Rides on Day: <%= @trip.rides_on_day(pd) %></h4>
-<% upd = @trip.pluck(:start_date) %>
-<% udate = upd.map(&:to_date) %>
-<h3>Date with the least trips: <%= date.min_by{ |i| date.count( i ) } %></h3>
-<h4>Rides on Day: <%= @trip.rides_on_day(upd) %></h4>
+    <tr>
+      <th>Subscriptions</th>
+      <th>Count</th>
+      <th>Percentage</th>
+    </tr>
+    <tr>
+      <td>Customer</td>
+      <td><%= customers %></td>
+      <td><%= ((customers * 100)/(customers + subscribers)).to_f  %>%</td>
+    </tr>
+    <tr>
+      <td>Subscriber</td>
+      <td><%= subscribers %></td>
+      <td><%= ((subscribers * 100)/(customers + subscribers)).to_f %>%</td>
+    </tr>
+  </table>
 
-<h2>All Stations</h2>
-<br/>
-<div class="digg_pagination">
-  <div class="page_info">
-    <%= page_entries_info @stations %>
+  <ul class="list-group">
+    <% pd = @trip.pluck(:start_date).map(&:to_date) %>
+    <% max_date = pd.max_by{ |i| pd.count( i ) } %>
+    <% min_date = pd.min_by{ |i| pd.count( i ) } %>
+
+    <li class="list-group-item">
+      <span class="badge"><%= max_date %></span>
+      Date with the most trips:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= pd.count(max_date) %></span>
+      Rides on Day:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= min_date %></span>
+      Date with the least trips:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= pd.count(min_date) %></span>
+      Rides on Day:
+    </li>
+  </ul>
+
+  <h2>All Stations</h2>
+  <br/>
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @stations %>
+    </div>
+    <%= will_paginate @stations, :container => false %>
   </div>
-  <%= will_paginate @stations, :container => false %>
-</div>
 
-<% @stations.each do |station| %>
-<% station_id = station.id %>
-
-    <h2><%= @station.find_by(id: station_id).name %></h2>
-    <h3>Number of rides started here : <%= @trip.started_at(station_id).count %></h3>
-    <h3>Number of rides ended at : <%= @trip.ended_at(station_id).count %></h3>
-
-    <% end_station_collection = @trip.end_stations_per_start_station(station_id) %>
-    <% stat_id = @trip.most_common_out_of(end_station_collection) %>
-    <h3>Most frequent destination station: <%= stat_id.nil? ? 'No Station Data' : @station.find_by(id: stat_id).name %></h3>
-
-    <% start_station_collection = @trip.start_stations_per_end_station(station_id) %>
-    <% stati_id = @trip.most_common_out_of(start_station_collection) %>
-    <h3>Most frequent origination station: <%= stati_id.nil? ? 'No Station Data' : @station.find_by(id: stati_id).name %></h3>
-
-    <% date_collection = @trip.start_date_per_station(station_id) %>
-    <% popular_start_date = @trip.most_common_out_of(date_collection) %>
-    <h3>Date with the highest number of trips: <%= popular_start_date.nil? ? 'No Station Data' : popular_start_date %></h3>
-
-    <% zip = @trip.most_common(:zip_code_id) %> <h3>Frequent zip code for users starting here: <%= zip.nil? ? 'No Station Data' : @zip_code.find_by(id: zip).zip_code %></h3>
-
-    <% bike_id_collection = @trip.bikes_started_per_station(station_id) %>
-    <% most_common_bike = @trip.most_common_out_of(bike_id_collection) %>
-    <h3>Most frequently used bike ID: <%= most_common_bike.nil? ? 'No Station Data' : most_common_bike %></h3>
-
-<% end %>
-
-<div class="digg_pagination">
-  <div class="page_info">
-    <%= page_entries_info @stations %>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <% @stations.each do |station| %>
+      <% station_id = station.id %>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading<%= station.id %>">
+          <h4 class="panel-title">
+            <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= station.id %>" aria-expanded="false" aria-controls="collapse<%= station.id %>">
+              <%= @station.find_by(id: station_id).name %>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse<%= station.id %>" class="panel-collapse collapse" aria-expanded="false" role="tabpanel" aria-labelledby="heading<%= station.id %>">
+          <div class="panel-body">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="badge"><%= @trip.started_at(station_id).count %></span>
+                Number of rides started here:
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= @trip.ended_at(station_id).count %></span>
+                Number of rides ended at:
+              </li>
+              <% end_station_collection = @trip.end_stations_per_start_station(station_id) %>
+              <% stat_id = @trip.most_common_out_of(end_station_collection) %>
+              <li class="list-group-item">
+                <span class="badge"><%= stat_id.nil? ? 'No Station Data' : @station.find_by(id: stat_id).name %></span>
+                Most frequent destination station:
+              </li>
+              <% start_station_collection = @trip.start_stations_per_end_station(station_id) %>
+              <% stati_id = @trip.most_common_out_of(start_station_collection) %>
+              <li class="list-group-item">
+                <span class="badge"><%= stati_id.nil? ? 'No Station Data' : @station.find_by(id: stati_id).name %></span>
+                Most frequent origination station:
+              </li>
+              <% date_collection = @trip.start_date_per_station(station_id) %>
+              <% popular_start_date = @trip.most_common_out_of(date_collection) %>
+              <li class="list-group-item">
+                <span class="badge"><%= popular_start_date.nil? ? 'No Station Data' : popular_start_date.to_date %></span>
+                Date with the highest number of trips:
+              </li>
+              <% zip = @trip.most_common(:zip_code_id) %>
+              <li class="list-group-item">
+                <span class="badge"><%= zip.nil? ? 'No Station Data' : @zip_code.find_by(id: zip).zip_code %></span>
+                Frequent zip code for users starting here:
+              </li>
+              <% bike_id_collection = @trip.bikes_started_per_station(station_id) %>
+              <% most_common_bike = @trip.most_common_out_of(bike_id_collection) %>
+              <li class="list-group-item">
+                <span class="badge"><%= most_common_bike.nil? ? 'No Station Data' : most_common_bike %></span>
+                Most frequently used bike ID:
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <% end %>
   </div>
-  <%= will_paginate @stations, :container => false %>
+
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @stations %>
+    </div>
+    <%= will_paginate @stations, :container => false %>
+  </div>
 </div>
