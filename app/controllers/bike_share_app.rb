@@ -149,6 +149,7 @@ class BikeShareApp < Sinatra::Base
   get '/trip-dashboard' do
     @trip = Trip
     @station = Station
+    @zip_code = ZipCode
 
     erb :"trips/trip-dashboard"
   end
@@ -213,5 +214,4 @@ class BikeShareApp < Sinatra::Base
     redirect '/conditions'
   end
 
->>>>>>> development
 end
