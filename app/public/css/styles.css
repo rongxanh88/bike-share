@@ -150,6 +150,10 @@ h1, h2, h3, h4, h5, h6, p {
   background-position-y: -43px;
 }
 
+.badge {
+  background-color: #87AFB2;
+}
+
 .footer {
   margin: 25px auto;
 }
