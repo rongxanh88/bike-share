@@ -212,8 +212,17 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/api/v1/stations/:id' do
-    @station = Station.find_by(id: params[:id])
-    @json = 
+    station = Station.find_by(id: params[:id])
+    info = []
+    info.push("id" => station.id)
+    info.push("name" => station.name)
+    info.push("latitude" => station.latitude)
+    info.push("longitude" => station.longitude)
+    info.push("dock_count" => station.dock_count)
+    info.push("installation_date" => station.installation_date)
+    info.push("city_id" => station.city_id)
+
+    @json = JSON.pretty_generate(info)
     erb :"stations/json"
   end
 
