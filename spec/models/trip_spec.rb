@@ -148,8 +148,8 @@ RSpec.describe Trip do
 
     it "returns number of trips ended at station id" do
 
-      num_trips = Trip.started_at(62)
-      expect(num_trips.count).to eq(2)
+      num_trips = Trip.ended_at(62)
+      expect(num_trips.count).to eq(1)
     end
 
     it "returns the most common end station id for each start station" do
@@ -172,11 +172,6 @@ RSpec.describe Trip do
       popular_start_date = Trip.most_common_out_of(date_collection)
       date = '2012-12-10 00:00:00.000000000 +0000'
       expect(popular_start_date).to eq(date)
-    end
-
-    it "returns most frequent zip code for users at each station" do
-
-      #We Need the Zip Code for customers saved for this test
     end
 
     it "returns the most popular bike id started from each station" do
