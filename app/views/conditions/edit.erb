@@ -1,42 +1,50 @@
 <h1>Weather Conditions Editor</h1><br/>
-
-<form action="/condition/<%= @condition.id %>" method="post">
-  <input type="hidden" name="_method" value="PUT"/>
-  <h4>Edit condition</h4>
-  <div class="input-group">
-    <input type="text" name="condition[date]" class="form-control" value="<%= @condition.date %>" aria-describedby="basic-addon3">
-  </div>
-  <div class="input-group">
-    <input type="text" name="condition[max_temp]" class="form-control" value="<%= @condition.max_temp %>" aria-describedby="basic-addon3">
-  </div>
-  <div class="input-group">
-    <input type="text" name="condition[mean_temp]" class="form-control" value="<%= @condition.mean_temp %>" aria-describedby="basic-addon3">
-  </div>
-  <div class="input-group">
-    <input type="text" name="condition[min_temp]" class="form-control" value="<%= @condition.min_temp %>" aria-describedby="basic-addon3">
-  </div>
-  <div class="input-group">
-    <input type="text" name="condition[mean_humidity]" class="form-control" value="<%= @condition.mean_humidity %>" aria-describedby="basic-addon3">
-  </div>
-  <div class="input-group">
-    <input type="text" name="condition[mean_visibility]" class="form-control" value="<%= @condition.mean_visibility %>" aria-describedby="basic-addon3">
-  </div>
-  <div class="input-group">
-    <input type="text" name="condition[mean_wind_speed]" class="form-control" value="<%= @condition.mean_wind_speed %>" aria-describedby="basic-addon3">
-  </div>
-  <div class="input-group">
-    <input type="text" name="condition[precipitation]" class="form-control" value="<%= @condition.precipitation %>" aria-describedby="basic-addon3">
-  </div>
-
-  <div class="input-group">
-    <div class="input-group-addon">
-      <% @cities.each do |city| %>
-        <%= default_state = "" %>
-        <% default_state = "checked" if city.id == @condition.city.id %>
-        <div class="radio">
-          <label><input <%= default_state %> type="radio" value="<%= city.id %>" name="city" aria-label="<%= city.name %>"><%= city.name %></label>
-        </div>
-      <% end %>
-  </div>
-  <input type="submit" value="Update Conditions"class="btn btn-default">
-</form>
+<div class="col-md-12">
+  <form action="/condition/<%= @condition.id %>" method="post">
+    <input type="hidden" name="_method" value="PUT"/>
+    <label>Date</label>
+    <div class="input-group">
+      <input type="text" name="condition[date]" class="form-control" value="<%= @condition.date %>" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Max Temperature</label>
+    <div class="input-group">
+      <input type="text" name="condition[max_temp]" class="form-control" value="<%= @condition.max_temp %>" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Mean Temperature</label>
+    <div class="input-group">
+      <input type="text" name="condition[mean_temp]" class="form-control" value="<%= @condition.mean_temp %>" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Min Temperature</label>
+    <div class="input-group">
+      <input type="text" name="condition[min_temp]" class="form-control" value="<%= @condition.min_temp %>" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Mean Humidity</label>
+    <div class="input-group">
+      <input type="text" name="condition[mean_humidity]" class="form-control" value="<%= @condition.mean_humidity %>" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Mean Visibility</label>
+    <div class="input-group">
+      <input type="text" name="condition[mean_visibility]" class="form-control" value="<%= @condition.mean_visibility %>" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Mean Wind Speed</label>
+    <div class="input-group">
+      <input type="text" name="condition[mean_wind_speed]" class="form-control" value="<%= @condition.mean_wind_speed %>" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Precipitation</label>
+    <div class="input-group">
+      <input type="text" name="condition[precipitation]" class="form-control" value="<%= @condition.precipitation %>" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>City</label>
+    <div class="input-group">
+      <div class="input-group-addon">
+        <% @cities.each do |city| %>
+          <%= default_state = "" %>
+          <% default_state = "checked" if city.id == @condition.city.id %>
+          <div class="radio">
+            <label><input <%= default_state %> type="radio" value="<%= city.id %>" name="city" aria-label="<%= city.name %>"><%= city.name %></label>
+          </div>
+        <% end %>
+    </div><br /><br />
+    <input type="submit" value="Update Conditions"class="btn btn-default">
+  </form>
+</div>

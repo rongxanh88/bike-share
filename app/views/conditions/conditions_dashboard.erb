@@ -1,0 +1,181 @@
+
+<h1>Weather Dashboard</h1>
+
+<h3>Trips Taken Based on Temperature</h3>
+  <table>
+    <tr>
+      <th>Temperature Range</th>
+      <th>Average Trips Taken</th>
+      <th>Most Trips Taken</th>
+      <th>Least Trips Taken</th>
+    </tr>
+    <tr>
+      <th>40-49</th>
+      <td><%= @condition.trips_on_days(40.0, 49.9, "average", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(40.0, 49.9, "max", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(40.0, 49.9, "min", :mean_temp) %></td>
+    </tr>
+    <tr>
+      <th>50-59</th>
+      <td><%= @condition.trips_on_days(50.0, 59.9, "average", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(50.0, 59.9, "max", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(50.0, 59.9, "min", :mean_temp) %></td>
+    </tr>
+    <tr>
+      <th>60-69</th>
+      <td><%= @condition.trips_on_days(60.0, 69.9, "average", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(60.0, 69.9, "max", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(60.0, 69.9, "min", :mean_temp) %></td>
+    </tr>
+    <tr>
+      <th>70-79</th>
+      <td><%= @condition.trips_on_days(70.0, 79.9, "average", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(70.0, 79.9, "max", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(70.0, 79.9, "min", :mean_temp) %></td>
+    </tr>
+    <tr>
+      <th>80-89</th>
+      <td><%= @condition.trips_on_days(80.0, 89.9, "average", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(80.0, 89.9, "max", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(80.0, 89.9, "min", :mean_temp) %></td>
+    </tr>
+    <tr>
+      <th>90-99</th>
+      <td><%= @condition.trips_on_days(90.0, 99.9, "average", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(90.0, 99.9, "max", :mean_temp) %></td>
+      <td><%= @condition.trips_on_days(90.0, 99.9, "min", :mean_temp) %></td>
+    </tr>
+  </table>
+</p>
+
+<p>
+  <h3>Trips Taken Based on Precipitation</h3>
+  <table>
+    <tr>
+      <th>Precipitation Range(inches)</th>
+      <th>Average Trips Taken</th>
+      <th>Most Trips Taken</th>
+      <th>Least Trips Taken</th>
+    </tr>
+    <tr>
+      <th>0-0.49</th>
+      <td><%= @condition.trips_on_days(0.0, 0.49, "average", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(0.0, 0.49, "max", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(0.0, 0.49, "min", :precipitation) %></td>
+    </tr>
+    <tr>
+      <th>0.50-0.99</th>
+      <td><%= @condition.trips_on_days(0.50, 0.99, "average", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(0.50, 0.99, "max", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(0.50, 0.99, "min", :precipitation) %></td>
+    </tr>
+    <tr>
+      <th>1-1.49</th>
+      <td><%= @condition.trips_on_days(1.0, 1.49, "average", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(1.0, 1.49, "max", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(1.0, 1.49, "min", :precipitation) %></td>
+    </tr>
+    <tr>
+      <th>1.5-1.99</th>
+      <td><%= @condition.trips_on_days(1.5, 1.99, "average", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(1.5, 1.99, "max", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(1.5, 1.99, "min", :precipitation) %></td>
+    </tr>
+    <tr>
+      <th>2-2.49</th>
+      <td><%= @condition.trips_on_days(2.9, 2.49, "average", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(2.9, 2.49, "max", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(2.9, 2.49, "min", :precipitation) %></td>
+    </tr>
+    <tr>
+      <th>2.5-2.99</th>
+      <td><%= @condition.trips_on_days(2.5, 2.99, "average", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(2.5, 2.99, "max", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(2.5, 2.99, "min", :precipitation) %></td>
+    </tr>
+    <tr>
+      <th>3-3.49</th>
+      <td><%= @condition.trips_on_days(3.0, 3.49, "average", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(3.0, 3.49, "max", :precipitation) %></td>
+      <td><%= @condition.trips_on_days(3.0, 3.49, "min", :precipitation) %></td>
+    </tr>
+  </table>
+</p>
+
+<p>
+  <h3>Trips Taken Based on Average Wind Speed</h3>
+  <table>
+    <tr>
+      <th>Wind Speed Range(mph)</th>
+      <th>Average Trips Taken</th>
+      <th>Most Trips Taken</th>
+      <th>Least Trips Taken</th>
+    </tr>
+    <tr>
+      <th>0-3</th>
+      <td><%= @condition.trips_on_days(0.0, 3.0, "average", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(0.0, 3.0, "max", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(0.0, 3.0, "min", :mean_wind_speed) %></td>
+    </tr>
+    <tr>
+      <th>4-7</th>
+      <td><%= @condition.trips_on_days(4.0, 7.0, "average", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(4.0, 7.0, "max", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(4.0, 7.0, "min", :mean_wind_speed) %></td>
+    </tr>
+    <tr>
+      <th>8-11</th>
+      <td><%= @condition.trips_on_days(8.0, 11.0, "average", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(8.0, 11.0, "max", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(8.0, 11.0, "min", :mean_wind_speed) %></td>
+    </tr>
+    <tr>
+      <th>12-15</th>
+      <td><%= @condition.trips_on_days(12.0, 15.0, "average", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(12.0, 15.0, "max", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(12.0, 15.0, "min", :mean_wind_speed) %></td>
+    </tr>
+    <tr>
+      <th>16-19</th>
+      <td><%= @condition.trips_on_days(16.0, 19.0, "average", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(16.0, 19.0, "max", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(16.0, 19.0, "min", :mean_wind_speed) %></td>
+    </tr>
+    <tr>
+      <th>20-23</th>
+      <td><%= @condition.trips_on_days(20.0, 23.0, "average", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(20.0, 23.0, "max", :mean_wind_speed) %></td>
+      <td><%= @condition.trips_on_days(20.0, 23.0, "min", :mean_wind_speed) %></td>
+    </tr>
+  </table>
+</p>
+
+<p>
+  <h3>Trips Taken Based on Average Visibility</h3>
+  <table>
+    <tr>
+      <th>Visibility Range(miles)</th>
+      <th>Average Trips Taken</th>
+      <th>Most Trips Taken</th>
+      <th>Least Trips Taken</th>
+    </tr>
+    <tr>
+      <th>4-6</th>
+      <td><%= @condition.trips_on_days(4.0, 6.0, "average", :mean_visibility) %></td>
+      <td><%= @condition.trips_on_days(4.0, 6.0, "max", :mean_visibility) %></td>
+      <td><%= @condition.trips_on_days(4.0, 6.0, "min", :mean_visibility) %></td>
+    </tr>
+    <tr>
+      <th>6-8</th>
+      <td><%= @condition.trips_on_days(6.0, 8.0, "average", :mean_visibility) %></td>
+      <td><%= @condition.trips_on_days(6.0, 8.0, "max", :mean_visibility) %></td>
+      <td><%= @condition.trips_on_days(6.0, 8.0, "min", :mean_visibility) %></td>
+    </tr>
+    <tr>
+      <th>8-10</th>
+      <td><%= @condition.trips_on_days(8.0, 10.0, "average", :mean_visibility) %></td>
+      <td><%= @condition.trips_on_days(8.0, 10.0, "max", :mean_visibility) %></td>
+      <td><%= @condition.trips_on_days(8.0, 10.0, "min", :mean_visibility) %></td>
+    </tr>
+    <tr>
+  </table>
