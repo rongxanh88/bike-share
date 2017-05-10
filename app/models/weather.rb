@@ -56,8 +56,8 @@ class Weather < ActiveRecord::Base
     precipitation = weather_by_date.average(:precipitation).to_f
   end
 
-  def self.trips_on_nice_days
-    nicest_days = Weather.select(:date).distinct.where(:mean_temp => 65.0..67.5)
+  def self.trips_on_nice_days(low_temp, high_temp, metric)
+    nicest_days = Weather.select(:date).distinct.where(:mean_temp => low_temp..high_temp)
 
     trips = nicest_days.map do |weather|
       year = weather.date.year
@@ -68,14 +68,65 @@ class Weather < ActiveRecord::Base
       day_end = Time.new(year, month, day, 23, 59)
 
       trip = Trip.where(start_date: (beginning_day..day_end))
-      trip if !trip.nil?
     end
+
+    answer = 0
+
+    case metric
+    when "average"
+      answer = average_number_of_rides(trips)
+    when "min"
+      answer = min_number_of_rides(trips)
+    when "max"
+      answer = max_number_of_rides(trips)
+    end
+
+    answer
+  end
+
+  private
+
+  def self.average_number_of_rides(trips)
+    number_of_days = 0
     count = 0
 
     trips.each do |trip|
       count += trip.count
+      number_of_days += 1 if trip.count > 0
     end
-    count
+
+    if number_of_days > 0
+      return count / number_of_days
+    else
+      return 0
+    end
+  end
+
+  def self.min_number_of_rides(trips)
+    answer = trips.min_by do |trip|
+      trip.count
+    end
+    if answer.nil?
+      nilify(answer)
+    else
+      answer.empty? ? 0 : answer.count
+    end
+  end
+
+  def self.max_number_of_rides(trips)
+    answer = trips.max_by do |trip|
+      trip.count
+    end
+    if answer.nil?
+      nilify(answer)
+    else
+      answer.empty? ? 0 : answer.count
+    end
+  end
+
+  def self.nilify(answer)
+    answer = 0
+    answer
   end
 
 end
