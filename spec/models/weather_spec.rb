@@ -7,43 +7,8 @@ RSpec.describe Trip do
   include StationCityCreator
   before(:each) do
     create_objects
-#Weather id: 737, date: "2013-08-29", max_temp: 81.0, mean_temp: 72.0, min_temp: 63.0, mean_humidity: 69.0, mean_visibility: 10.0, mean_wind_speed: 7.0, precipitation: 0.0, city_id: 1
-    Weather.create!(date: "2013-12-22",
-                    max_temp: 80.0,
-                    mean_temp: 72.0,
-                    min_temp: 63.0,
-                    mean_humidity: 70.0,
-                    mean_visibility: 10.0,
-                    mean_wind_speed: 8.0,
-                    precipitation: 0.0,
-                    city_id: 1)
-    Weather.create!(date: "2013-12-22",
-                    max_temp: 81.0,
-                    mean_temp: 72.0,
-                    min_temp: 64.0,
-                    mean_humidity: 70.0,
-                    mean_visibility: 10.0,
-                    mean_wind_speed: 8.0,
-                    precipitation: 0.0,
-                    city_id: 1)
-    Weather.create!(date: "2013-11-23",
-                    max_temp: 70.0,
-                    mean_temp: 74.0,
-                    min_temp: 60.0,
-                    mean_humidity: 71.0,
-                    mean_visibility: 11.0,
-                    mean_wind_speed: 4.0,
-                    precipitation: 0.0,
-                    city_id: 1)
-    Weather.create!(date: "2014-10-25",
-                    max_temp: 60.0,
-                    mean_temp: 73.0,
-                    min_temp: 63.0,
-                    mean_humidity: 72.0,
-                    mean_visibility: 10.0,
-                    mean_wind_speed: 9.0,
-                    precipitation: 0.0,
-                    city_id: 2)
+    create_weather_objects
+    create_trip_objects
   end
 
   describe "weather by date" do
@@ -52,10 +17,6 @@ RSpec.describe Trip do
       expect(weather_by_date).to eq(2)
     end
 
-    it "returns weather for user date" do
-      input = (Weather.weather_by_date("2013-12-22")).count
-      expect(input).to eq(2)
-    end
   end
 
   describe "model method" do
@@ -99,6 +60,20 @@ RSpec.describe Trip do
       weather_by_date = Weather.where(date: "2013-12-22")
       precipitation = weather_by_date.average(:precipitation).to_f
       expect(precipitation).to eq(0.0)
+    end
+
+    it "returns trips based on average/min/max temperature" do
+      trips_on_weather_average = Weather.trips_on_days(40, 49.9, "average", :mean_temp)
+      expect(trips_on_weather_average).to eq(0)
+      trips_on_weather_min = Weather.trips_on_days(40, 49.9, "min", :min_temp)
+      expect(trips_on_weather_min).to eq(0)
+      trips_on_weather_max = Weather.trips_on_days(40, 49.9, "min", :max_temp)
+      expect(trips_on_weather_max).to eq(0)
+    end
+
+    it "returns trips based on precipitation" do
+      trips_on_weather_precip = Weather.trips_on_days(0.0, 0.49, "average", :precipitation)
+      binding.pry
     end
   end
 end

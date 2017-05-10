@@ -48,5 +48,24 @@ module StationCityCreator
                       mean_wind_speed: 9.0,
                       precipitation: 0.0,
                       city_id: 2)
+      Weather.create!(date: "10/12/2012",
+                      max_temp: 60.0,
+                      mean_temp: 73.0,
+                      min_temp: 63.0,
+                      mean_humidity: 72.0,
+                      mean_visibility: 10.0,
+                      mean_wind_speed: 9.0,
+                      precipitation: 0.0,
+                      city_id: 2)
+  end
+
+  def create_trip_objects
+      subscriber = Subscription.create(name: "subscriber")
+      customer = Subscription.create(name: "customer")
+
+      Trip.create!(duration: 63, start_date: '10/12/2012', end_date: '22/12/2012', start_station_id: 62, end_station_id: 66, bike_id: 520, subscription_id: 2)
+      Trip.create!(duration: 85, start_date: '10/12/2012', end_date: '10/12/2012', start_station_id: 62, end_station_id: 62, bike_id: 520, subscription_id: 2)
+      Trip.create!(duration: 70, start_date: '10/10/2012', end_date: '10/10/2012', start_station_id: 66, end_station_id: 66, bike_id: 520, subscription_id: 2)
+      Trip.create!(duration: 70, start_date: '11/10/2012', end_date: '10/10/2012', start_station_id: 84, end_station_id: 66, bike_id: 793, subscription_id: 1)
   end
 end
