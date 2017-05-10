@@ -1,10 +1,8 @@
 jQuery(document).ready(function($) {
 
-  // $(function() {
-  //   $(".radio input").click(function() {
-  //     $(".radio input").removeAttr("checked")
-  //     // $(this).attr("checked", true)
-  //   });
-  // });
+  $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+  });
 
 })
