@@ -14,7 +14,7 @@ RSpec.describe "user can navigate to all stations list and edit information" do
       expect(page).to have_content("Bike Stations")
     end
 
-    it "they can create a station" do
+    it "they can create/edit a station" do
     create_objects
     expect(current_path).to eq('/stations')
     #user can click on create a new station
