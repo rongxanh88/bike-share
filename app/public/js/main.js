@@ -5,4 +5,8 @@ jQuery(document).ready(function($) {
       $("#wrapper").toggleClass("toggled");
   });
 
+  $('#myCollapsible').collapse({
+    toggle: false
+  })
+
 })
