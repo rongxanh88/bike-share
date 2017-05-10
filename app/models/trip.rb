@@ -2,7 +2,10 @@ class Trip < ActiveRecord::Base
   default_scope { order(start_date: :desc) }
 
   belongs_to :stations
+  has_many :trips_weathers
+  has_many :weathers, through: :trips_weathers
   has_many :weathers
+
 
   validates :duration, presence: true
   validates :start_date, presence: true

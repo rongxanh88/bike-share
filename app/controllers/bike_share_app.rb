@@ -219,6 +219,6 @@ class BikeShareApp < Sinatra::Base
     @station = Station
     @condition = Weather
     
-    erb :"stations/station-dashboard"
+    erb :"conditions/conditions_dashboard"
   end
 end
