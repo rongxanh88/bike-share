@@ -2,6 +2,7 @@ class Weather < ActiveRecord::Base
   default_scope { order(date: :desc) }
 
   belongs_to :city
+  has_many :trips
 
   validates :date, presence: true
   validates :max_temp, presence: true
