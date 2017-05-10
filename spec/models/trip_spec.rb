@@ -17,22 +17,6 @@ RSpec.describe Trip do
     dock_count: 56, installation_date: '22/12/2012')
   end
 
-  # describe "number of rides started at this station" do
-  #
-  #   it "returns the number of rides" do
-  #     #
-  #     # Trip.create!(duration: 63, start_date: '01/01/2013', end_date: '01/01/2013', start_station_id: 1, end_station_id: 2, bike_id: 520, subscription_id: 2)
-  #     #
-  #     # Trip.create!(duration: 23, start_date: '01/01/2013', end_date: '01/01/2013', start_station_id: 1, end_station_id: 2, bike_id: 520, subscription_id: 2)
-  #     #
-  #     # Trip.create!(duration: 63, start_date: '01/01/2013', end_date: '01/01/2013', start_station_id: 2, end_station_id: 1, bike_id: 520, subscription_id: 2)
-  #
-  #     trips_made = ""
-  #     #binding.pry
-  #     expect(trips_made).to eq(2)
-  #   end
-  # end
-
   describe "model method" do
 
     it "returns the average duration of a ride" do
