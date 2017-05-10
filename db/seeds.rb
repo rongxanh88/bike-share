@@ -61,7 +61,7 @@ CSV.foreach "db/csv/station.csv", headers: true, header_converters: :symbol do |
 end
 
 #load trip fixtures
-CSV.foreach "db/csv/trip_fixture.csv", headers: true, header_converters: :symbol do |row|
+CSV.foreach "db/csv/trip_fixture2.csv", headers: true, header_converters: :symbol do |row|
   subscription = Subscription.find_or_create_by(name: row[:subscription_type])
   zip_code = ZipCode.find_or_create_by(zip_code: row[:zip_code].to_i)
 
@@ -106,6 +106,7 @@ CSV.foreach "db/csv/weather.csv", headers: true, header_converters: :symbol do |
 
   puts "Adding weather for #{city_name}."
 end
+
 
 # CSV.foreach "db/csv/status.csv", headers: true, header_converters: :symbol do |row|
 #   StationStatus.create(station_id: row[:station_id],

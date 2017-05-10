@@ -1,4 +1,9 @@
+require 'will_paginate'
+require 'will_paginate/active_record'
+
 class Station < ActiveRecord::Base
+  include WillPaginate::Sinatra::Helpers
+
   belongs_to :city
   has_many :station_statuses
   has_many :trips

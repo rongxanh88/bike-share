@@ -151,6 +151,7 @@ class BikeShareApp < Sinatra::Base
     @trip = Trip
     @station = Station
     @zip_code = ZipCode
+    @stations = Station.paginate(:page => params[:page], :per_page => 10)
 
     erb :"trips/trip-dashboard"
   end
@@ -215,10 +216,12 @@ class BikeShareApp < Sinatra::Base
     redirect '/conditions'
   end
 
-  get '/weather-dashboard' do
-    @weather = Weather
+  get '/conditions-dashboard' do
+    @trip = Trip
+    @station = Station
+    @condition = Weather
 
-    erb :"conditions/weather-dashboard"
+    erb :"conditions/conditions_dashboard"
   end
 
 end
