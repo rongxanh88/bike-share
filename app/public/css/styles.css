@@ -1,5 +1,23 @@
 body {
   font-family: 'Roboto', sans-serif;
+  background: #D3D3D3;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: #FF9144
+}
+
+.btn-default {
+  background-color: #2DEFFF;
+}
+
+.btn {
+  border-radius: 0px;
+}
+
+.btn-default:hover {
+    color: #141413;
+    background-color: #FF9144;
 }
 
 #wrapper {
@@ -22,7 +40,7 @@ body {
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #141413;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -118,4 +136,20 @@ body {
         position: relative;
         margin-right: 0;
     }
+}
+
+.input-group {
+  display: block;
+}
+
+.input-group-addon {
+  text-align: left;
+  color: #fff;
+  background-image: url(/images/skyline.jpg);
+  background-size: 1140px, 154px;
+  background-position-y: -43px;
+}
+
+.footer {
+  margin: 25px auto;
 }
