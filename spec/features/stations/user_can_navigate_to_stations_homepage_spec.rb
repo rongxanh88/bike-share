@@ -33,7 +33,6 @@ RSpec.describe "user can navigate to all stations list and edit information" do
     expect(page).to have_content("Phil")
     #user can navigate to station dashboard
     click_on "Station: Phil"
-    save_and_open_page
-    # save_and_open_page
+    expect(current_path).to eq('/stations/1')
     end
 end
