@@ -1,47 +1,49 @@
 <h1>Weather Conditions</h1><br/>
+<div class="col-md-12">
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @conditions %>
+    </div>
+    <%= will_paginate @conditions, :container => false %>
+  </div><br/>
 
-<div class="digg_pagination">
-  <div class="page_info">
-    <%= page_entries_info @conditions %>
-  </div>
-  <%= will_paginate @conditions, :container => false %>
-</div><br/>
-
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <% @conditions.each do |condition| %>
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingOne">
-        <h4 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Details
-            <!-- <a href="/condition/<%= condition.id %>"><p>View Details for: <%= condition.date %></p></a> -->
-          </a>
-        </h4>
-      </div>
-      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-        <div class="panel-body">
-          <p>City: <%= condition.city.name %>
-          <p>Max Temp: <%= condition.max_temp %></p>
-          <p>Mean Temp: <%= condition.mean_temp %></p>
-          <p>Min Temp: <%= condition.min_temp %></p>
-          <p>Mean Humidity: <%= condition.mean_humidity %></p>
-          <p>Mean Visibility: <%= condition.mean_visibility %></p>
-          <p>Mean Wind Speed: <%= condition.mean_wind_speed %></p>
-          <p>Precipitation: <%= condition.precipitation %></p>
-          <a href="/condition/<%= condition.id %>/edit">Edit</a>
-          <form action="/condition/<%= condition.id %>" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            <input type="submit" value="Delete" />
-          </form>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <% @conditions.each do |condition| %>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading<%= condition.id %>">
+          <h4 class="panel-title">
+            <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= condition.id %>" aria-expanded="false" aria-controls="collapse<%= condition.id %>">
+              Details
+              <!-- <a href="/condition/<%= condition.id %>"><p>View Details for: <%= condition.date %></p></a> -->
+            </a>
+          </h4>
+        </div>
+        <div id="collapse<%= condition.id %>" class="panel-collapse collapse" aria-expanded="false" role="tabpanel" aria-labelledby="heading<%= condition.id %>">
+          <div class="panel-body">
+            <p>City: <%= condition.city.name %>
+            <p>Max Temp: <%= condition.max_temp %></p>
+            <p>Mean Temp: <%= condition.mean_temp %></p>
+            <p>Min Temp: <%= condition.min_temp %></p>
+            <p>Mean Humidity: <%= condition.mean_humidity %></p>
+            <p>Mean Visibility: <%= condition.mean_visibility %></p>
+            <p>Mean Wind Speed: <%= condition.mean_wind_speed %></p>
+            <p>Precipitation: <%= condition.precipitation %></p>
+            <a href="/condition/<%= condition.id %>/edit">Edit</a>
+            <form action="/condition/<%= condition.id %>" method="post">
+              <input type="hidden" name="_method" value="DELETE" />
+              <input type="submit" value="Delete" />
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
-
-<div class="digg_pagination">
-  <div class="page_info">
-    <%= page_entries_info @conditions %>
+    <% end %>
   </div>
-  <%= will_paginate @conditions, :container => false %>
-</div><br/>
+
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @conditions %>
+    </div>
+    <%= will_paginate @conditions, :container => false %>
+  </div><br/>
+
+</div>
