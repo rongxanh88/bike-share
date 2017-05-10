@@ -1,5 +1,6 @@
 require 'will_paginate'
 require 'will_paginate/active_record'
+require 'json'
 require 'pry'
 
 class BikeShareApp < Sinatra::Base
@@ -133,20 +134,6 @@ class BikeShareApp < Sinatra::Base
     redirect '/trips'
   end
 
-  # post '/trips' do
-  #   trip = trip.new(duration: params[:duration],
-  #                         start_date: params[:start_date],
-  #                         end_date: params[:end_date],
-  #                         start_id_station: params[:start_id_station],
-  #                         end_id_station: params[:end_id_station],
-  #                         bike_id: params[:bike_id],
-  #                         subscription_type: params[:subscription_type],
-  #                         zip_code_id: params[:zip_code_id]
-  #                         )
-  #   trip.save
-  #   redirect '/trips'
-  # end
-
   get '/trip-dashboard' do
     @trip = Trip
     @station = Station
@@ -222,6 +209,12 @@ class BikeShareApp < Sinatra::Base
     @condition = Weather
 
     erb :"conditions/conditions_dashboard"
+  end
+
+  get '/api/v1/stations/:id' do
+    @station = Station.find_by(id: params[:id])
+    @json = 
+    erb :"stations/json"
   end
 
 end
