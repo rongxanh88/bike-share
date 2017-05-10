@@ -1,7 +1,7 @@
 
 <h1>Trip Dashboard</h1>
 
-<h3>Average Bikes Available per Station: <%= @trip.avg(:duration) %></h3>
+<h3>Average Bikes Available per Station: <%= @station.avg(:dock_count) %></h3>
 <h3>Longest Ride: <%= @trip.maximum(:duration) %></h3>
 <h3>Shortest Ride: <%= @trip.minimum(:duration) %></h3>
 <% start_station_id = @trip.most_common(:start_station_id) %>
@@ -12,86 +12,100 @@
   <table>
     <tr>
       <th>Month</th>
-      <th>2012</th>
       <th>2013</th>
+      <th>2014</th>
+      <th>2015</th>
     </tr>
 
     <tr>
       <td>January</td>
-      <td><%= @trip.rides_by_month(0, 2012) %></td>
       <td><%= @trip.rides_by_month(0, 2013) %></td>
+      <td><%= @trip.rides_by_month(0, 2014) %></td>
+      <td><%= @trip.rides_by_month(0, 2015) %></td>
     </tr>
 
     <tr>
       <td>February</td>
-      <td><%= @trip.rides_by_month(1, 2012) %></td>
       <td><%= @trip.rides_by_month(1, 2013) %></td>
+      <td><%= @trip.rides_by_month(1, 2014) %></td>
+      <td><%= @trip.rides_by_month(1, 2015) %></td>
     </tr>
 
     <tr>
       <td>March</td>
-      <td><%= @trip.rides_by_month(2, 2012) %></td>
       <td><%= @trip.rides_by_month(2, 2013) %></td>
+      <td><%= @trip.rides_by_month(2, 2014) %></td>
+      <td><%= @trip.rides_by_month(2, 2015) %></td>
     </tr>
 
     <tr>
       <td>April</td>
-      <td><%= @trip.rides_by_month(3, 2012) %></td>
       <td><%= @trip.rides_by_month(3, 2013) %></td>
+      <td><%= @trip.rides_by_month(3, 2014) %></td>
+      <td><%= @trip.rides_by_month(3, 2015) %></td>
     </tr>
 
     <tr>
       <td>May</td>
-      <td><%= @trip.rides_by_month(4, 2012) %></td>
       <td><%= @trip.rides_by_month(4, 2013) %></td>
+      <td><%= @trip.rides_by_month(4, 2014) %></td>
+      <td><%= @trip.rides_by_month(4, 2015) %></td>
     </tr>
 
     <tr>
       <td>June</td>
-      <td><%= @trip.rides_by_month(5, 2012) %></td>
       <td><%= @trip.rides_by_month(5, 2013) %></td>
+      <td><%= @trip.rides_by_month(5, 2014) %></td>
+      <td><%= @trip.rides_by_month(5, 2015) %></td>
     </tr>
 
     <tr>
       <td>July</td>
-      <td><%= @trip.rides_by_month(6, 2012) %></td>
       <td><%= @trip.rides_by_month(6, 2013) %></td>
+      <td><%= @trip.rides_by_month(6, 2014) %></td>
+      <td><%= @trip.rides_by_month(6, 2015) %></td>
     </tr>
 
     <tr>
       <td>August</td>
-      <td><%= @trip.rides_by_month(7, 2012) %></td>
       <td><%= @trip.rides_by_month(7, 2013) %></td>
+      <td><%= @trip.rides_by_month(7, 2014) %></td>
+      <td><%= @trip.rides_by_month(7, 2015) %></td>
     </tr>
 
     <tr>
       <td>September</td>
-      <td><%= @trip.rides_by_month(8, 2012) %></td>
       <td><%= @trip.rides_by_month(8, 2013) %></td>
+      <td><%= @trip.rides_by_month(8, 2014) %></td>
+      <td><%= @trip.rides_by_month(8, 2015) %></td>
     </tr>
 
     <tr>
       <td>October</td>
-      <td><%= @trip.rides_by_month(9, 2012) %></td>
       <td><%= @trip.rides_by_month(9, 2013) %></td>
+      <td><%= @trip.rides_by_month(9, 2014) %></td>
+      <td><%= @trip.rides_by_month(9, 2015) %></td>
     </tr>
 
     <tr>
       <td>November</td>
-      <td><%= @trip.rides_by_month(10, 2012) %></td>
       <td><%= @trip.rides_by_month(10, 2013) %></td>
+      <td><%= @trip.rides_by_month(10, 2014) %></td>
+      <td><%= @trip.rides_by_month(10, 2015) %></td>
     </tr>
 
     <tr>
       <td>December</td>
-      <td><%= @trip.rides_by_month(11, 2012) %></td>
       <td><%= @trip.rides_by_month(11, 2013) %></td>
+      <td><%= @trip.rides_by_month(11, 2014) %></td>
+      <td><%= @trip.rides_by_month(11, 2015) %></td>
     </tr>
 
     <tr>
       <td>Totals</td>
-      <td><%= @trip.rides_by_year(2012) %></td>
       <td><%= @trip.rides_by_year(2013) %></td>
+      <td><%= @trip.rides_by_year(2014) %></td>
+      <td><%= @trip.rides_by_year(2015) %></td>
     </tr>
   </table>
 <% popular_bike = @trip.most_common(:bike_id) %>
