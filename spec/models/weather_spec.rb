@@ -6,7 +6,7 @@ require "pry"
 RSpec.describe Trip do
   include StationCityCreator
   before(:each) do
-    create_cities
+    create_objects
 #Weather id: 737, date: "2013-08-29", max_temp: 81.0, mean_temp: 72.0, min_temp: 63.0, mean_humidity: 69.0, mean_visibility: 10.0, mean_wind_speed: 7.0, precipitation: 0.0, city_id: 1
     Weather.create!(date: "2013-12-22",
                     max_temp: 80.0,
