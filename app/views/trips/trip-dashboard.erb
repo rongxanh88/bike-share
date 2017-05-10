@@ -130,30 +130,45 @@
 <h3>Date with the least trips: <%= upd.month %>, <%= upd.day %> <%= upd.year %></h3>
 <h4>Rides on Day: <%= @trip.rides_on_day(upd) %></h4>
 
-On an individual station show page add the following information:
+<h2>All Stations</h2>
+<br/>
+<div class="digg_pagination">
+  <div class="page_info">
+    <%= page_entries_info @stations %>
+  </div>
+  <%= will_paginate @stations, :container => false %>
+</div>
 
-<% station_id = 5 %>
+<% @stations.each do |station| %>
+<% station_id = station.id %>
 
-<h2><%= @station.find_by(id: station_id).name %></h2>
-<h3>Number of rides started here : <%= @trip.started_at(station_id).count %></h3>
-<h3>Number of rides ended at : <%= @trip.ended_at(station_id).count %></h3>
+    <h2><%= @station.find_by(id: station_id).name %></h2>
+    <h3>Number of rides started here : <%= @trip.started_at(station_id).count %></h3>
+    <h3>Number of rides ended at : <%= @trip.ended_at(station_id).count %></h3>
 
-<% end_station_collection = @trip.end_stations_per_start_station(station_id) %>
-<% stat_id = @trip.most_common_out_of(end_station_collection) %>
-<h3>Most frequent destination station: <%= @station.find_by(id: stat_id).name %></h3>
+    <% end_station_collection = @trip.end_stations_per_start_station(station_id) %>
+    <% stat_id = @trip.most_common_out_of(end_station_collection) %>
+    <h3>Most frequent destination station: <%= stat_id.nil? ? 'No Station Data' : @station.find_by(id: stat_id).name %></h3>
 
-<% start_station_collection = @trip.start_stations_per_end_station(station_id) %>
-<% stati_id = @trip.most_common_out_of(start_station_collection) %>
-<h3>Most frequent origination station: <%= @station.find_by(id: stati_id).name %></h3>
+    <% start_station_collection = @trip.start_stations_per_end_station(station_id) %>
+    <% stati_id = @trip.most_common_out_of(start_station_collection) %>
+    <h3>Most frequent origination station: <%= stati_id.nil? ? 'No Station Data' : @station.find_by(id: stati_id).name %></h3>
 
-<% date_collection = @trip.start_date_per_station(station_id) %>
-<% popular_start_date = @trip.most_common_out_of(date_collection) %>
-<h3>Date with the highest number of trips: <%= popular_start_date %></h3>
+    <% date_collection = @trip.start_date_per_station(station_id) %>
+    <% popular_start_date = @trip.most_common_out_of(date_collection) %>
+    <h3>Date with the highest number of trips: <%= popular_start_date.nil? ? 'No Station Data' : popular_start_date %></h3>
 
-<% zip = @trip.most_common(:zip_code_id) %> <h3>Frequent zip code for users starting here: <%= @zip_code.find_by(id: zip).zip_code %></h3>
+    <% zip = @trip.most_common(:zip_code_id) %> <h3>Frequent zip code for users starting here: <%= zip.nil? ? 'No Station Data' : @zip_code.find_by(id: zip).zip_code %></h3>
 
-<% bike_id_collection = @trip.bikes_started_per_station(station_id) %>
-<h3>Most frequently used bike ID: <%= @trip.most_common_out_of(bike_id_collection) %></h3>
+    <% bike_id_collection = @trip.bikes_started_per_station(station_id) %>
+    <% most_common_bike = @trip.most_common_out_of(bike_id_collection) %>
+    <h3>Most frequently used bike ID: <%= most_common_bike.nil? ? 'No Station Data' : most_common_bike %></h3>
 
-<!--
-Bike ID mot frequently starting a trip at this station. -->
+<% end %>
+
+<div class="digg_pagination">
+  <div class="page_info">
+    <%= page_entries_info @stations %>
+  </div>
+  <%= will_paginate @stations, :container => false %>
+</div>
