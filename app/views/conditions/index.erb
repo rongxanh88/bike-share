@@ -1,5 +1,12 @@
-
 <h1>Weather Conditions</h1><br/>
+
+<div class="digg_pagination">
+  <div class="page_info">
+    <%= page_entries_info @conditions %>
+  </div>
+  <%= will_paginate @conditions, :container => false %>
+</div><br/>
+
 <% @conditions.each do |condition| %>
   <a href="/condition/<%= condition.id %>"><p>View Details for: <%= condition.date %></p></a>
   <p>City: <%= condition.city.name %>
@@ -10,10 +17,16 @@
   <p>Mean Visibility: <%= condition.mean_visibility %></p>
   <p>Mean Wind Speed: <%= condition.mean_wind_speed %></p>
   <p>Precipitation: <%= condition.precipitation %></p>
-  <br/>
   <a href="/condition/<%= condition.id %>/edit">Edit</a>
   <form action="/condition/<%= condition.id %>" method="post">
     <input type="hidden" name="_method" value="DELETE" />
     <input type="submit" value="Delete" />
   </form>
 <% end %>
+
+<div class="digg_pagination">
+  <div class="page_info">
+    <%= page_entries_info @conditions %>
+  </div>
+  <%= will_paginate @conditions, :container => false %>
+</div><br/>

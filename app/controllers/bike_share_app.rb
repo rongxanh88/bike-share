@@ -3,8 +3,10 @@ require 'will_paginate/active_record'
 require 'pry'
 
 class BikeShareApp < Sinatra::Base
+  include WillPaginate::Sinatra::Helpers
+
   get '/stations' do
-    @stations = Station.all
+    @stations = Station.paginate(:page => params[:page], :per_page => 30)
     erb :"stations/index"
     # haml :"stations/index"
   end
@@ -65,7 +67,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    @trips = Trip.all.paginate(:page => params[:page], :per_page => 30)
+    @trips = Trip.paginate(:page => params[:page], :per_page => 30)
 
     erb :"trips/index"
   end
@@ -89,7 +91,6 @@ class BikeShareApp < Sinatra::Base
   end
 
   put '/trips/:id' do
-    binding.pry
     trip = Trip.find_by(id: params[:id])
     start_station = Station.find_by(name: params[:start_station])
     end_station = Station.find_by(name: params[:end_station])
@@ -132,19 +133,19 @@ class BikeShareApp < Sinatra::Base
     redirect '/trips'
   end
 
-  post '/trips' do
-    trip = trip.new(duration: params[:duration],
-                          start_date: params[:start_date],
-                          end_date: params[:end_date],
-                          start_id_station: params[:start_id_station],
-                          end_id_station: params[:end_id_station],
-                          bike_id: params[:bike_id],
-                          subscription_type: params[:subscription_type],
-                          zip_code_id: params[:zip_code_id]
-                          )
-    trip.save
-    redirect '/trips'
-  end
+  # post '/trips' do
+  #   trip = trip.new(duration: params[:duration],
+  #                         start_date: params[:start_date],
+  #                         end_date: params[:end_date],
+  #                         start_id_station: params[:start_id_station],
+  #                         end_id_station: params[:end_id_station],
+  #                         bike_id: params[:bike_id],
+  #                         subscription_type: params[:subscription_type],
+  #                         zip_code_id: params[:zip_code_id]
+  #                         )
+  #   trip.save
+  #   redirect '/trips'
+  # end
 
   get '/trip-dashboard' do
     @trip = Trip
@@ -154,7 +155,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/conditions' do
-    @conditions = Weather.all
+    @conditions = Weather.paginate(:page => params[:page], :per_page => 30)
     erb :"conditions/index"
   end
 
@@ -212,6 +213,4 @@ class BikeShareApp < Sinatra::Base
 
     redirect '/conditions'
   end
-
->>>>>>> development
 end
