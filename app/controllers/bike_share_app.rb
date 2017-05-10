@@ -151,6 +151,7 @@ class BikeShareApp < Sinatra::Base
     @trip = Trip
     @station = Station
     @zip_code = ZipCode
+    @stations = Station.paginate(:page => params[:page], :per_page => 10)
 
     erb :"trips/trip-dashboard"
   end

@@ -1,24 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <h1>Bike Share</h1>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/styles.css">
   </head>
 
-
-  <a href="/stations/new"><h3>Create a New Station</h3></a>
-  <a href="/trips/new"><h3>Create a New Trip</h3></a>
-  <a href="/station-dashboard"><h3>Station Dashboard</h3></a>
-  <a href="/trip-dashboard"><h3>Trip Dashboard</h3></a>
-  <a href="/weather-dashboard"><h3>Weather Dashboard</h3></a>
-
   <body>
-     <%= yield %>
-     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-     <script type="text/javascript" src="/js/main.js"></script>
+    <div id="wrapper">
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="#">
+                  Bike Share
+              </a>
+          </li>
+          <li>
+              <a href="/stations/new">Create a New Station</a>
+          </li>
+          <li>
+              <a href="/trips/new">Create a New Trip</a>
+          </li>
+          <li>
+              <a href="/station-dashboard">Station Dashboard</a>
+          </li>
+          <li>
+              <a href="/trip-dashboard">Trip Dashboard</a>
+          </li>
+          <li>
+              <a href="/weather-dashboard">Weather Dashboard</a>
+          </li>
+        </ul>
+      </div>
+
+      <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <%= yield %>
+      </div>
+    </div>
+
+    <div class="container footer">
+     <div class="row">
+       <div class="col-md-12">
+         <p>@Copyright 2017</p>
+       </div>
+     </div>
+    </div>
+
+   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+   <script type="text/javascript" src="/js/main.js"></script>
+
+   </div>
   </body>
 </html>

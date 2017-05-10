@@ -7,22 +7,37 @@
   <%= will_paginate @conditions, :container => false %>
 </div><br/>
 
-<% @conditions.each do |condition| %>
-  <a href="/condition/<%= condition.id %>"><p>View Details for: <%= condition.date %></p></a>
-  <p>City: <%= condition.city.name %>
-  <p>Max Temp: <%= condition.max_temp %></p>
-  <p>Mean Temp: <%= condition.mean_temp %></p>
-  <p>Min Temp: <%= condition.min_temp %></p>
-  <p>Mean Humidity: <%= condition.mean_humidity %></p>
-  <p>Mean Visibility: <%= condition.mean_visibility %></p>
-  <p>Mean Wind Speed: <%= condition.mean_wind_speed %></p>
-  <p>Precipitation: <%= condition.precipitation %></p>
-  <a href="/condition/<%= condition.id %>/edit">Edit</a>
-  <form action="/condition/<%= condition.id %>" method="post">
-    <input type="hidden" name="_method" value="DELETE" />
-    <input type="submit" value="Delete" />
-  </form>
-<% end %>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <% @conditions.each do |condition| %>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Details
+            <!-- <a href="/condition/<%= condition.id %>"><p>View Details for: <%= condition.date %></p></a> -->
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          <p>City: <%= condition.city.name %>
+          <p>Max Temp: <%= condition.max_temp %></p>
+          <p>Mean Temp: <%= condition.mean_temp %></p>
+          <p>Min Temp: <%= condition.min_temp %></p>
+          <p>Mean Humidity: <%= condition.mean_humidity %></p>
+          <p>Mean Visibility: <%= condition.mean_visibility %></p>
+          <p>Mean Wind Speed: <%= condition.mean_wind_speed %></p>
+          <p>Precipitation: <%= condition.precipitation %></p>
+          <a href="/condition/<%= condition.id %>/edit">Edit</a>
+          <form action="/condition/<%= condition.id %>" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            <input type="submit" value="Delete" />
+          </form>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <div class="digg_pagination">
   <div class="page_info">
