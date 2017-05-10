@@ -6,7 +6,6 @@ class Weather < ActiveRecord::Base
   has_many :trips, through: :trips_weathers
   has_many :trips
 
-
   validates :date, presence: true
   validates :max_temp, presence: true
   validates :mean_temp, presence: true

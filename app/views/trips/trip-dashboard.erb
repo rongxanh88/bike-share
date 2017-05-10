@@ -22,7 +22,6 @@
       <td><%= @trip.rides_by_month(0, 2013) %></td>
     </tr>
 
-
     <tr>
       <td>February</td>
       <td><%= @trip.rides_by_month(1, 2012) %></td>
@@ -123,19 +122,38 @@
   </tr>
 </table>
 
+<h1>NEEDS TO PARSE OUT DATE FROM TIME FORMAT</h1>
 <% pd = @trip.most_common(:start_date) %>
 <h3>Date with the most trips: <%= pd.month %>, <%= pd.day %> <%= pd.year %></h3>
 <h4>Rides on Day: <%= @trip.rides_on_day(pd) %></h4>
+<% upd = @trip.least_common(:start_date) %>
+<h3>Date with the least trips: <%= upd.month %>, <%= upd.day %> <%= upd.year %></h3>
+<h4>Rides on Day: <%= @trip.rides_on_day(upd) %></h4>
 
-<!--
-Single date with the highest number of trips with a count of those trips.
-Single date with the lowest number of trips with a count of those trips.
 On an individual station show page add the following information:
 
-Number of rides started at this station.
-Number of rides ended at this station.
-Most frequent destination station (for rides that began at this station).
-Most freuqnet origination station (for rides that ended at this station).
-Date with the highest number of trips started at this station.
-Most frequent zip code for users starting trips at this station.
-Bike ID most frequently starting a trip at this station. -->
+<% station_id = 5 %>
+
+<h2><%= @station.find_by(id: station_id).name %></h2>
+<h3>Number of rides started here : <%= @trip.started_at(station_id).count %></h3>
+<h3>Number of rides ended at : <%= @trip.ended_at(station_id).count %></h3>
+
+<% end_station_collection = @trip.end_stations_per_start_station(station_id) %>
+<% stat_id = @trip.most_common_out_of(end_station_collection) %>
+<h3>Most frequent destination station: <%= @station.find_by(id: stat_id).name %></h3>
+
+<% start_station_collection = @trip.start_stations_per_end_station(station_id) %>
+<% stati_id = @trip.most_common_out_of(start_station_collection) %>
+<h3>Most frequent origination station: <%= @station.find_by(id: stati_id).name %></h3>
+
+<% date_collection = @trip.start_date_per_station(station_id) %>
+<% popular_start_date = @trip.most_common_out_of(date_collection) %>
+<h3>Date with the highest number of trips: <%= popular_start_date %></h3>
+
+<% zip = @trip.most_common(:zip_code_id) %> <h3>Frequent zip code for users starting here: <%= @zip_code.find_by(id: zip).zip_code %></h3>
+
+<% bike_id_collection = @trip.bikes_started_per_station(station_id) %>
+<h3>Most frequently used bike ID: <%= @trip.most_common_out_of(bike_id_collection) %></h3>
+
+<!--
+Bike ID mot frequently starting a trip at this station. -->
