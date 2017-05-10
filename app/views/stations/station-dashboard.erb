@@ -1,33 +1,27 @@
-<!DOCTYPE html>
-<html lang="en"
-  <head>
-  </head>
-  <body>
 
-      <h1>Station Dashboard</h1>
-        <h3>Station Count: <%= @station.all.count %></h3>
-        <h3>Average Bikes Available per Station: <%= @station.avg(:dock_count) %></h3>
-        <h3>Most Docks Available at a Station: <%= @station.maximum(:dock_count) %></h3>
-        <h3>Stations where the most docks are available: </h3>
-          <ul><% @station.most_docks.each do |station| %>
-            <li><%= station %>: </li>
-            <% end %>
-          </ul>
-        <h3>Fewest Docks available at a station: <%= @station.minimum(:dock_count) %></h3>
-        <h3>Stations where the fewest docks are available:</h3>
-          <ul><% @station.fewest_docks.each do |station| %>
-            <li><%= station %>: </li>
-            <% end %>
-          </ul>
-        <h3>Most recently installed station(s):</h3>
-          <ul><% @station.newest_stations.each do |station| %>
-                <li><%= station %></li>
-              <% end %>
-          </ul>
-        <h3>Oldest Station(s):</h3>
-          <ul><% @station.oldest_stations.each do |station| %>
-              <li><%= station %></li>
-            <% end %>
-          </ul>
-    </body>
-</html>
+<h1>Station Dashboard</h1>
+
+<h3>Station Count: <%= @station.all.count %></h3>
+<h3>Average Bikes Available per Station: <%= @station.avg(:dock_count) %></h3>
+<h3>Most Docks Available at a Station: <%= @station.maximum(:dock_count) %></h3>
+<h3>Stations where the most docks are available: </h3>
+<ul><% @station.most_docks.each do |station| %>
+  <li><%= station %>: </li>
+  <% end %>
+</ul>
+<h3>Fewest Docks available at a station: <%= @station.minimum(:dock_count) %></h3>
+<h3>Stations where the fewest docks are available:</h3>
+  <ul><% @station.fewest_docks.each do |station| %>
+    <li><%= station %>: </li>
+    <% end %>
+  </ul>
+<h3>Most recently installed station(s):</h3>
+  <ul><% @station.newest_stations.each do |station| %>
+        <li><%= station %></li>
+      <% end %>
+  </ul>
+<h3>Oldest Station(s):</h3>
+<ul><% @station.oldest_stations.each do |station| %>
+    <li><%= station %></li>
+  <% end %>
+</ul>
