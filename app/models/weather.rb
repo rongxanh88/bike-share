@@ -2,6 +2,8 @@ class Weather < ActiveRecord::Base
   default_scope { order(date: :desc) }
 
   belongs_to :city
+  has_many :trips_weathers
+  has_many :trips, through: :trips_weathers
   has_many :trips
 
   validates :date, presence: true
@@ -52,5 +54,105 @@ class Weather < ActiveRecord::Base
   def self.precipitation(date)
     weather_by_date = Weather.where(date: date)
     precipitation = weather_by_date.average(:precipitation).to_f
+  end
+
+  def self.trips_on_days(low, high, metric, attribute)
+    # :attribute = attribute
+    days = Weather.select(:date).distinct.where(attribute.to_sym => (low..high))
+
+    trips = days.map do |weather|
+      year = weather.date.year
+      month = weather.date.month
+      day = weather.date.day
+
+      beginning_day = Time.new(year,month,day,0,0)
+      day_end = Time.new(year, month, day, 23, 59)
+
+      trip = Trip.where(start_date: (beginning_day..day_end))
+    end
+
+    answer = 0
+
+    case metric
+    when "average"
+      answer = average_number_of_rides(trips)
+    when "min"
+      answer = min_number_of_rides(trips)
+    when "max"
+      answer = max_number_of_rides(trips)
+    end
+
+    answer
+  end
+
+  # def self.trips_on_rainy_days(low_precip, high_precip, metric)
+  #   rainy_days = Weather.select(:date).distinct.where(:precipitation => low_precip..high_precip)
+  #
+  #   trips = rainy_days.map do |weather|
+  #     year = weather.date.year
+  #     month = weather.date.month
+  #     day = weather.date.day
+  #
+  #     beginning_day = Time.new(year,month,day,0,0)
+  #     day_end = Time.new(year, month, day, 23, 59)
+  #
+  #     trip = Trip.where(start_date: (beginning_day..day_end))
+  #   end
+  #
+  #   answer = 0
+  #
+  #   case metric
+  #   when "average"
+  #     answer = average_number_of_rides(trips)
+  #   when "min"
+  #     answer = min_number_of_rides(trips)
+  #   when "max"
+  #     answer = max_number_of_rides(trips)
+  #   end
+  #   answer
+  # end
+
+  private
+
+  def self.average_number_of_rides(trips)
+    number_of_days = 0
+    count = 0
+
+    trips.each do |trip|
+      count += trip.count
+      number_of_days += 1 if trip.count > 0
+    end
+
+    if number_of_days > 0
+      return count / number_of_days
+    else
+      return 0
+    end
+  end
+
+  def self.min_number_of_rides(trips)
+    answer = trips.min_by do |trip|
+      trip.count
+    end
+    if answer.nil?
+      nilify(answer)
+    else
+      answer.empty? ? 0 : answer.count
+    end
+  end
+
+  def self.max_number_of_rides(trips)
+    answer = trips.max_by do |trip|
+      trip.count
+    end
+    if answer.nil?
+      nilify(answer)
+    else
+      answer.empty? ? 0 : answer.count
+    end
+  end
+
+  def self.nilify(answer)
+    answer = 0
   end
 end
