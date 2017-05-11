@@ -1,0 +1,39 @@
+<h1>Trip Editor</h1><br/>
+<div class="col-md-12">
+  <form action="/trips/<%= @trip.id %>" method="post">
+    <input type="hidden" name="_method" value="PUT"/>
+    <div class="input-group">
+      <label>Start Date:</label>
+      <input type="text" name="start_date" class="form-control" value="<%= @trip.start_date %>" id="trip_start_date_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <div class="input-group">
+      <label>End Date:</label>
+      <input type="text" name="end_date" class="form-control" value="<%= @trip.end_date %>" id="trip_end_date_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <div class="input-group">
+      <label>Duration:</label>
+      <input type="text" name="duration" class="form-control" value="<%= @trip.duration %>" id="trip_duration_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <div class="input-group">
+      <label>Start Station:</label>
+      <input type="text" name="start_station" class="form-control" value="<%= @trip_info[:start_station].name %>" id="trip_start_station_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <div class="input-group">
+      <label>End Station:</label>
+      <input type="text" name="end_station" class="form-control" value="<%= @trip_info[:end_station].name %>" id="trip_end_station_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <div class="input-group">
+      <label>Bike ID:</label>
+      <input type="text" name="bike_id" class="form-control" value="<%= @trip.bike_id %>" id="trip_bike_id_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <div class="input-group">
+      <label>Zip Code:</label>
+      <input type="text" name="zip_code" class="form-control" value="<%= @trip_info[:zip_code].zip_code %>" id="trip_zip_code_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <div class="input-group">
+      <label>Subscription:</label>
+      <input type="text" name="subscription" class="form-control" value="<%= @trip_info[:subscription].name %>" id="trip_subscription_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <input type="submit" value="Update Trip" class="btn btn-default">
+  </form>
+</div>

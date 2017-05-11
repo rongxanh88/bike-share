@@ -1,1 +1,5 @@
 db/csv/*.csv
+.DS_STORE
+db/.DS_STORE
+db/csv/.DS_STORE
+*.html

@@ -1,0 +1,46 @@
+
+<h1>Station Dashboard</h1>
+<div class="col-md-12">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <span class="badge"><%= @station.all.count %></span>
+      Station Count:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @station.avg(:dock_count) %></span>
+      Average Bikes Available per Station:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @station.maximum(:dock_count) %></span>
+      Most Docks Available at a Station:
+    </li>
+    <li class="list-group-item">
+      <% @station.most_docks.each do |station| %>
+      <span class="badge"><%= station %></span>
+      <% end %>
+      Stations where the most docks are available:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @station.minimum(:dock_count) %></span>
+      Fewest Docks available at a station:
+    </li>
+    <li class="list-group-item">
+      <% @station.fewest_docks.each do |station| %>
+        <span class="badge"><%= station %></span>
+      <% end %>
+      Stations where the fewest docks are available:
+    </li>
+    <li class="list-group-item">
+      <% @station.newest_stations.each do |station| %>
+        <span class="badge"><%= station %></span>
+      <% end %>
+      Most recently installed station(s):
+    </li>
+    <li class="list-group-item">
+      <% @station.oldest_stations.each do |station| %>
+          <span class="badge"><%= station %></span>
+      <% end %>
+      Oldest Station(s):
+    </li>
+  </ul>
+</div>

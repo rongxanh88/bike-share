@@ -1,0 +1,37 @@
+<h1>Bike Trips</h1><br/>
+
+<div class="digg_pagination">
+  <div class="page_info">
+    <%= page_entries_info @trips %>
+  </div>
+  <%= will_paginate @trips, :container => false %>
+</div><br/>
+
+<% @trips.each do |trip| %>
+  <% start_station = Station.find_by(id: trip.start_station_id) %>
+  <% end_station = Station.find_by(id: trip.end_station_id) %>
+  <% zip_code = ZipCode.find_by(id: trip.zip_code_id) %>
+  <% subscription = Subscription.find_by(id: trip.subscription_id) %>
+
+  <a href="/trips/<%= trip.id %>"><p>Trip: <%= trip.id %></p></a>
+  <p>Start Date: <%= trip.start_date %></p>
+  <p>End Date: <%= trip.end_date %></p>
+  <p>Duration: <%= trip.duration %></p>
+  <p>Start Station Name: <%= start_station.name %></p>
+  <p>End Station Name: <%= end_station.name %></p>
+  <p>Bike ID: <%= trip.bike_id %></p>
+  <p>User Zip Code: <%= zip_code.zip_code %></p>
+  <p>User Account: <%= subscription.name %></p>
+  <a href="/trips/<%= trip.id %>/edit">Edit</a>
+  <form action="/trips/<%= trip.id %>" method="post">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input type="submit" value="Delete" />
+  </form><br/>
+<% end %>
+
+<div class="digg_pagination">
+  <div class="page_info">
+    <%= page_entries_info @trips %>
+  </div>
+  <%= will_paginate @trips, :container => false %>
+</div>

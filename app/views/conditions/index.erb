@@ -1,0 +1,75 @@
+<h1>Weather Conditions</h1><br/>
+<div class="col-md-12">
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @conditions %>
+    </div>
+    <%= will_paginate @conditions, :container => false %>
+  </div><br/>
+
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <% @conditions.each do |condition| %>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading<%= condition.id %>">
+          <h4 class="panel-title">
+            <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= condition.id %>" aria-expanded="false" aria-controls="collapse<%= condition.id %>">
+              <%= condition.city.name %>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse<%= condition.id %>" class="panel-collapse collapse" aria-expanded="false" role="tabpanel" aria-labelledby="heading<%= condition.id %>">
+          <div class="panel-body">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="badge"><%= condition.city.name %></span>
+                City:
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= condition.max_temp %></span>
+                Max Temp:
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= condition.mean_temp %></span>
+                Mean Temp:
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= condition.min_temp %></span>
+                Min Temp:
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= condition.mean_humidity %></span>
+                Mean Humidity:
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= condition.mean_visibility %></span>
+                Mean Visibility:
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= condition.mean_wind_speed %></span>
+                Mean Wind Speed:
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= condition.precipitation %></span>
+                Precipitation:
+              </li>
+            </ul>
+
+            <a class="btn btn-primary edit_btn" href="/condition/<%= condition.id %>/edit">Edit</a>
+            <form action="/condition/<%= condition.id %>" method="post">
+              <input type="hidden" name="_method" value="DELETE" />
+              <input class="btn btn-danger delete_btn" type="submit" value="Delete" />
+            </form>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @conditions %>
+    </div>
+    <%= will_paginate @conditions, :container => false %>
+  </div><br/>
+
+</div>

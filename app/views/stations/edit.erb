@@ -1,0 +1,38 @@
+<h1>Station Editor</h1><br/>
+<div class="col-md-12">
+  <form action="/station/<%= @station.id %>" method="post">
+    <input type="hidden" name="_method" value="PUT"/>
+    <label>Station Name</label>
+    <div class="input-group">
+      <input type="text" name="station[name]" class="form-control" value="<%= @station.name %>" id="station_name_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Latitude</label>
+    <div class="input-group">
+      <input type="text" name="station[latitude]" class="form-control" value="<%= @station.latitude %>" id="station_latitude_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Longitude</label>
+    <div class="input-group">
+      <input type="text" name="station[longitude]" class="form-control" value="<%= @station.longitude %>" id="station_longitude_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Dock Count</label>
+    <div class="input-group">
+      <input type="text" name="station[dock_count]" class="form-control" value="<%= @station.dock_count %>" id="station_dock_count_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>Installation Date</label>
+    <div class="input-group">
+      <input type="text" name="station[installation_date]" class="form-control" value="<%= @station.installation_date %>" id="station_installation_date_input" aria-describedby="basic-addon3">
+    </div><br /><br />
+    <label>City</label>
+    <div class="input-group">
+      <div class="input-group-addon">
+        <% @cities.each do |city| %>
+          <%= default_state = "" %>
+          <% default_state = "checked" if city.id == @station.city.id %>
+          <div class="radio">
+            <label><input <%= default_state %> type="radio" value="<%= city.id %>" name="city" aria-label="<%= city.name %>"><%= city.name %></label>
+          </div>
+        <% end %>
+    </div><br /><br />
+    <input type="submit" value="Update Station"class="btn btn-default">
+  </form>
+</div>

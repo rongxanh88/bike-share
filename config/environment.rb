@@ -12,6 +12,7 @@ Dir.glob(File.join(APP_ROOT, 'app', 'models', '*.rb')).each { |file| require fil
 
 # require database configurations
 require File.join(APP_ROOT, 'config', 'database')
+require File.join(APP_ROOT, 'config/initializers', 'initializers.rb')
 
 # configure BikeShare settings
 class BikeShareApp < Sinatra::Base
@@ -20,4 +21,3 @@ class BikeShareApp < Sinatra::Base
   set :views, File.join(APP_ROOT, "app", "views")
   set :public_folder, File.join(APP_ROOT, "app", "public")
 end
-

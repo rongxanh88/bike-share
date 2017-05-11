@@ -1,0 +1,36 @@
+<h1>Station: <%= @station.name %></h1>
+<div class="col-md-6">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <span class="badge"><%= @station.latitude %></span>
+      Latitude:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @station.longitude %></span>
+      Longitude:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @station.dock_count %></span>
+      Dock Count:
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= @station.installation_date %></span>
+      Installation Date:
+    </li>
+  </ul>
+  <a class="edit_btn btn btn-primary" href="/stations/<%= @station.id %>/edit">Edit</a>
+  <form action="/stations/<%= @station.id %>" method="post">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input class="delete_btn btn btn-danger" type="submit" value="Delete" />
+  </form>
+</div>
+
+<div class="col-md-6 google-map">
+  <iframe
+    width="600"
+    height="450"
+    frameborder="0" style="border:0"
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD59Y7L5AUP6OWTUvr5Co-7dKpEUpqK4K0
+      &q=<%= @station.name %>&center=<%= @station.latitude %>, <%= @station.longitude %>" allowfullscreen>
+  </iframe>
+</div>
