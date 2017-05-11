@@ -73,7 +73,7 @@ RSpec.describe Trip do
 
     it "returns trips based on precipitation" do
       trips_on_weather_precip = Weather.trips_on_days(0.0, 0.49, "average", :precipitation)
-      binding.pry
+      expect(trips_on_weather_precip).to eq(0)
     end
   end
 end

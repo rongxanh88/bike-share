@@ -14,7 +14,6 @@ include StationCityCreator
     #user can see relevant information
     expect(page).to have_content("Phil")
     expect(page).to have_content("Station Dashboard")
-    save_and_open_page
   end
 
 end
