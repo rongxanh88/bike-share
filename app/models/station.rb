@@ -3,6 +3,7 @@ require 'will_paginate/active_record'
 
 class Station < ActiveRecord::Base
   include WillPaginate::Sinatra::Helpers
+  default_scope { order(name: :asc) }
 
   belongs_to :city
   has_many :station_statuses
