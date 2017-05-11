@@ -14,9 +14,8 @@ RSpec.describe "user can navigate to all stations list and edit information" do
       expect(page).to have_content("Bike Stations")
     end
 
-    it "they can create a station" do
-    create_stations
-    create_cities
+    it "they can create/edit a station" do
+    create_objects
     expect(current_path).to eq('/stations')
     #user can click on create a new station
     click_on 'Create a New Station'
@@ -31,7 +30,9 @@ RSpec.describe "user can navigate to all stations list and edit information" do
     #user is redirected to stations page
     expect(current_path).to eq('/stations')
     #user can see the newly created station
-    # expect(page).to have_content("Phil")
-    # save_and_open_page
+    expect(page).to have_content("Phil")
+    #user can navigate to station dashboard
+    click_on "Station: Phil"
+    expect(current_path).to eq('/stations/1')
     end
 end
