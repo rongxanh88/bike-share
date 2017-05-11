@@ -232,7 +232,7 @@
               <% start_station_collection = @trip.start_stations_per_end_station(station_id) %>
               <% stati_id = @trip.most_common_out_of(start_station_collection) %>
               <li class="list-group-item">
-                <span class="badge"><%= stati_id.nil? ? 'No Station Data' : @station.find_by(id: stati_id).name %></span>
+                <span class="badge"><%= stat_id.nil? ? 'No Station Data' : @station.find_by(id: stat_id).name %></span>
                 Most frequent origination station:
               </li>
               <% date_collection = @trip.start_date_per_station(station_id) %>
