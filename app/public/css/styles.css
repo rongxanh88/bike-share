@@ -20,6 +20,14 @@ h1, h2, h3, h4, h5, h6, p {
     background-color: #FF9144;
 }
 
+.delete_btn {
+  float: right;
+}
+
+.edit_btn {
+  float: left;
+}
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
