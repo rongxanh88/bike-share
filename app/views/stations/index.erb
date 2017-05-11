@@ -7,20 +7,44 @@
   <%= will_paginate @stations, :container => false %>
 </div>
 
-<% @stations.each do |station| %>
-  <a href="/stations/<%= station.id %>"><p>Station: <%= station.name %></p></a>
-  <!--<p>Latitude: <%= station.latitude %></p>
-  <p>Longitude: <%= station.longitude %></p>-->
-  <p>Dock Count: <%= station.dock_count %></p>
-  <p>Installation Date: <%= station.installation_date %></p>
-  <p>City: <%= station.city.name %>
-  <br/>
-  <a href="/stations/<%= station.id %>/edit">Edit</a>
-  <form action="/stations/<%= station.id %>" method="post">
-    <input type="hidden" name="_method" value="DELETE" />
-    <input type="submit" value="Delete" />
-  </form>
-<% end %>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <% @stations.each do |station| %>
+    <% station_id = station.id %>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading<%= station.id %>">
+        <h4 class="panel-title">
+          <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= station.id %>" aria-expanded="false" aria-controls="collapse<%= station.id %>">
+            <%= station.name %>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse<%= station.id %>" class="panel-collapse collapse" aria-expanded="false" role="tabpanel" aria-labelledby="heading<%= station.id %>">
+        <div class="panel-body">
+          <a href="/stations/<%= station.id %>"><p>View Station</p></a>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge"><%= station.dock_count %></span>
+              Dock Count:
+            </li>
+            <li class="list-group-item">
+              <span class="badge"><%= station.installation_date %></span>
+              Installation Date:
+            </li>
+            <li class="list-group-item">
+              <span class="badge"><%= station.city.name %></span>
+              City:
+            </li>
+          </ul>
+          <a class="btn btn-primary edit_btn" href="/stations/<%= station.id %>/edit">Edit</a>
+          <form action="/stations/<%= station.id %>" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            <input class="btn btn-danger delete_btn" type="submit" value="Delete" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <% end %>
+</div>
 
 <div class="digg_pagination">
   <div class="page_info">
