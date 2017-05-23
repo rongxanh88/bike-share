@@ -63,7 +63,7 @@ end
 #load trip fixtures
 CSV.foreach "db/csv/trip_fixture.csv", headers: true, header_converters: :symbol do |row|
   subscription = Subscription.find_or_create_by(name: row[:subscription_type])
-  zip_code = ZipCode.find_or_create_by(zip_code: ZipCode.validate(row[:zip_code].to_i))
+  zip_code = ZipCode.find_or_create_by(zip_code: row[:zip_code].to_i)
 
   start_station_name = validate_station(row[:start_station_name])
   end_station_name = validate_station(row[:end_station_name])
