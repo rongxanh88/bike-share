@@ -1,4 +1,4 @@
-# Bike Share - A web app for analysing bike share usage across several cities
+# Bike Share - A web app for analyzing bike share usage across several cities
 
 # Project for Turing School of Software and Design
 
